@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "tdigp",
+  "version": "0.0.1",
+  "dependencies": [
+    "sfml",
+    "sol2",
+    "tgui",
+    "nlohmann-json"
+  ],
+  "builtin-baseline": "1286cac8751e13bb289061b7e3b89eb4c3f613a2"
+}
