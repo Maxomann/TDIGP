@@ -1,1 +1,1 @@
-add_library(TDIGPCore core.h core.cpp   "IIssueEntry.h")
+add_library(TDIGPCore core.h core.cpp   "ITDItem.h")
