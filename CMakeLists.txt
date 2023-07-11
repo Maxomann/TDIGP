@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(TDIGP)
+project(TDMon)
 set(CMAKE_CXX_STANDARD 20)
 
 
@@ -9,5 +9,4 @@ find_package(nlohmann_json REQUIRED)
 find_package(Lua REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 
-add_subdirectory(TDIGP/Core)
-add_subdirectory(TDIGP/Visualizer)
+add_subdirectory(TDMon/Core)
