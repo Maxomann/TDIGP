@@ -9,4 +9,4 @@ find_package(nlohmann_json REQUIRED)
 find_package(Lua REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 
-add_subdirectory(TDMon/Core)
+add_subdirectory(TDMon)

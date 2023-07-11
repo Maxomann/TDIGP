@@ -3,8 +3,9 @@
 #include <string>
 #include <vector>
 
-class ITDItem {
-  using ProjectId = std::string;
+namespace tdm {
+class TdItem {
+ public:
   using IssueId = std::string;
   using DeveloperId = std::string;
   using IssueLabel = std::string;
@@ -21,7 +22,9 @@ class ITDItem {
   DeveloperId createdBy_;
   DeveloperId resolvedBy_;
   */
-  //virtual const ProjectId& getProjectId() const = 0;
+  // virtual const ProjectId& getProjectId() const = 0;
+
+  virtual ~TdItem() = default;
 
   virtual const Id& getId() const = 0;
   virtual const std::vector<IssueLabel>& getLabels() const = 0;
@@ -34,3 +37,4 @@ class ITDItem {
   virtual const DeveloperId& getReportedBy() const = 0;
   virtual const DeveloperId& getResolvedBy() const = 0;
 };
+}  // namespace tdm
