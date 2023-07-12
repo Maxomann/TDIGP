@@ -10,19 +10,23 @@ int main() {
 
 namespace tdm {
 void Core::run() {
-  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+  window_.create(sf::VideoMode(600, 600), "Technical Debt Monsters!");
+  gui_.setTarget(window_);
+
   sf::CircleShape shape(100.f);
   shape.setFillColor(sf::Color::Green);
 
-  while (window.isOpen()) {
+  while (window_.isOpen()) {
     sf::Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) window.close();
+    while (window_.pollEvent(event)) {
+      gui_.handleEvent(event);
+
+      if (event.type == sf::Event::Closed) window_.close();
     }
 
-    window.clear();
-    window.draw(shape);
-    window.display();
+    window_.clear(sf::Color(186,186,186));
+    window_.draw(shape);
+    window_.display();
   }
 }
 }  // namespace tdm
