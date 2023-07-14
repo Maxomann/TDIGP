@@ -9,7 +9,13 @@ class ApplicationState {
 
   virtual void init(tgui::GuiSFML& gui) = 0;
 
-  virtual void update() = 0;
+  /**
+   * @brief Update this application state.
+   * @return Return nullptr to continue running the currently active state.
+   * Return a valid ApplicationState object to signal the core to switch the
+   * current state to the new (returned) one.
+   */
+  virtual std::unique_ptr<ApplicationState> update() = 0;
 
   virtual void cleanup(tgui::GuiSFML& gui) = 0;
 };

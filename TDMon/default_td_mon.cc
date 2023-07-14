@@ -1,4 +1,4 @@
-#include "default_td_mon.h"
+#include <TDMon/default_td_mon.h>
 
 tdmon::DefaultTdMon::DefaultTdMon(unsigned int attack_value,
                                 unsigned int defense_value,
