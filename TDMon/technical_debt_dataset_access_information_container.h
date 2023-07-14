@@ -2,11 +2,11 @@
 
 #include<filesystem>
 
-namespace tdm {
+namespace tdmon {
 class TechnicalDebtDatasetAccessInformationContainer {
  public:
   virtual ~TechnicalDebtDatasetAccessInformationContainer() = default;
 
   virtual void setDatabasePath(std::filesystem::path path) = 0;
 };
-}  // namespace tdm
+}  // namespace tdmon

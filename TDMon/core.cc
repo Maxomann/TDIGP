@@ -4,11 +4,11 @@
 #include <iostream>
 
 int main() {
-  tdm::Core core;
+  tdmon::Core core;
   core.run();
 }
 
-namespace tdm {
+namespace tdmon {
 void Core::run() {
   window_.create(sf::VideoMode(600, 600), "Technical Debt Monsters!");
   gui_.setTarget(window_);
@@ -24,9 +24,9 @@ void Core::run() {
       if (event.type == sf::Event::Closed) window_.close();
     }
 
-    window_.clear(sf::Color(186,186,186));
+    window_.clear(sf::Color(186, 186, 186));
     window_.draw(shape);
     window_.display();
   }
 }
-}  // namespace tdm
+}  // namespace tdmon

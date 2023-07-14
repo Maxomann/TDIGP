@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace tdm {
+namespace tdmon {
 class TdItem {
  public:
   using IssueId = std::string;
@@ -38,4 +38,4 @@ class TdItem {
   virtual const DeveloperId& getReportedBy() const = 0;
   virtual const DeveloperId& getResolvedBy() const = 0;
 };
-}  // namespace tdm
+}  // namespace tdmon

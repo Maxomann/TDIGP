@@ -3,7 +3,9 @@
 #include <TGUI/TGUI.hpp>
 #include <TGUI/Backends/SFML.hpp>
 
-namespace tdm {
+#include "TDMon/application_state.h"
+
+namespace tdmon {
 class Core {
  public:
   /**
@@ -15,5 +17,7 @@ class Core {
   sf::RenderWindow window_;
 
   tgui::GuiSFML gui_;
+
+
 };
-}  // namespace tdm
+}  // namespace tdmon

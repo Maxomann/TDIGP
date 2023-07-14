@@ -1,6 +1,6 @@
 #pragma once
 
-namespace tdm {
+namespace tdmon {
 class ConnectableToDataSources {
  public:
   virtual ~ConnectableToDataSources() = default;
@@ -9,4 +9,4 @@ class ConnectableToDataSources {
   virtual bool isRequiredDataAccessInformationAvailable() = 0;
   virtual bool isConnectedToDataSources() = 0;
 };
-}  // namespace tdm
+}  // namespace tdmon

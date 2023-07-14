@@ -1,6 +1,6 @@
 #pragma once
 
-namespace tdm {
+namespace tdmon {
 class TdMon {
  public:
   virtual ~TdMon() = default;
@@ -11,4 +11,4 @@ class TdMon {
   virtual unsigned int getDefenseValue() const = 0;
   virtual unsigned int getSpeedValue() const = 0;
 };
-}  // namespace tdm
+}  // namespace tdmon

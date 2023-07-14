@@ -2,7 +2,7 @@
 
 #include <TDMon/td_mon.h>
 
-namespace tdm {
+namespace tdmon {
 class DefaultTdMon : public TdMon {
  public:
   DefaultTdMon(unsigned int attack_value, unsigned int defense_value,
@@ -19,4 +19,4 @@ class DefaultTdMon : public TdMon {
   unsigned int defense_value_ = 0;
   unsigned int speed_value_ = 0;
 };
-}  // namespace tdm
+}  // namespace tdmon
