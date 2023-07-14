@@ -7,13 +7,6 @@
 namespace tdmon {
 class MainMenu : public ApplicationState {
  public:
-  static const std::string kApplicationNameLabelText;
-  static const std::string kViewMascotButtonText;
-  static const std::string kConnectToDataSourcesButtonText;
-
-  static const int kHeadingFontSize = 44;
-  static const int kButtonFontSize = 20;
-
   // Inherited via ApplicationState
   void init(tgui::GuiSFML& gui) override;
   std::unique_ptr<ApplicationState> update() override;
