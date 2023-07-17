@@ -16,10 +16,18 @@ void MainMenu::init(tgui::GuiSFML& gui) {
 
   view_mascot_button_ = tgui::Button::create(Constants::kViewMascotButtonText);
   view_mascot_button_->setTextSize(Constants::kButtonFontSize);
+  view_mascot_button_->onPress.connect([&]() {
+    next_application_state_change_ =
+        SupportedApplicationStateChanges::kObserveMenu;
+  });
   button_layout_->add(view_mascot_button_);
   connect_to_data_sources_button_ =
       tgui::Button::create(Constants::kConnectToDataSourcesButtonText);
   connect_to_data_sources_button_->setTextSize(Constants::kButtonFontSize);
+  connect_to_data_sources_button_->onPress.connect([&]() {
+    next_application_state_change_ =
+        SupportedApplicationStateChanges::kSetupMenu;
+  });
   button_layout_->add(connect_to_data_sources_button_);
 
   // insert space *after* the buttons have been added
@@ -30,7 +38,7 @@ void MainMenu::init(tgui::GuiSFML& gui) {
 }
 
 SupportedApplicationStateChanges MainMenu::update() {
-  return SupportedApplicationStateChanges::kNull;
+  return next_application_state_change_;
 }
 
 void MainMenu::cleanup(tgui::GuiSFML& gui) { gui.remove(main_menu_group_); }

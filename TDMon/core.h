@@ -60,8 +60,7 @@ class Core {
   std::unique_ptr<ApplicationState> application_state_;
 
   /**
-   * @brief Update the current application state and switch the application
-   * state if requested.
+   * @brief Update the current application state. May trigger a switch to a different application state, if the current state requests it.
    * @return return true, if the application should continue to run. Return
    * false, if the application should be closed.
    */

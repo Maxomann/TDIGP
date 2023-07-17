@@ -15,6 +15,8 @@ class MainMenu : public ApplicationState {
   SupportedApplicationStateTypes getApplicationStateType() const override;
 
  private:
+  SupportedApplicationStateChanges next_application_state_change_ = SupportedApplicationStateChanges::kNull;
+
   tgui::Group::Ptr main_menu_group_ = nullptr;
   tgui::Label::Ptr main_name_label_ = nullptr;
 
