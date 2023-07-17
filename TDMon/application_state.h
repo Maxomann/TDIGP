@@ -1,5 +1,7 @@
 #pragma once
 
+#include <TDMon/constants.h>
+
 #include <TGUI/TGUI.hpp>
 
 namespace tdmon {
@@ -11,14 +13,12 @@ class ApplicationState {
 
   /**
    * @brief Update this application state.
-   * @return Return nullptr to continue running the currently active state.
-   * Return a valid ApplicationState object to signal the core to switch the
-   * current state to the new (returned) one.
-   * Note: Do not call the init() method before returning the ApplicationState.
-   * This is done automatically in the Core.
+   * @return Indicate which (if any) application state change should take place. If you want to stay in the same state, return kNull.
    */
-  virtual std::unique_ptr<ApplicationState> update() = 0;
+  virtual SupportedApplicationStateChanges update() = 0;
 
   virtual void cleanup(tgui::GuiSFML& gui) = 0;
+
+  virtual SupportedApplicationStateTypes getApplicationStateType() const = 0;
 };
 }  // namespace tdmon

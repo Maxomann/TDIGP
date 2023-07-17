@@ -1,8 +1,9 @@
+#include "setup_menu.h"
 #include <TDMon/constants.h>
-#include <TDMon/setup.h>
+#include <TDMon/setup_menu.h>
 
 namespace tdmon {
-void Setup::init(tgui::GuiSFML& gui) {
+void SetupMenu::init(tgui::GuiSFML& gui) {
   setup_group_ = tgui::Group::create();
 
   setup_form_layout_ = tgui::VerticalLayout::create();
@@ -17,7 +18,11 @@ void Setup::init(tgui::GuiSFML& gui) {
   gui.add(setup_group_);
 }
 
-std::unique_ptr<ApplicationState> Setup::update() { return nullptr; }
+SupportedApplicationStateChanges SetupMenu::update() { return SupportedApplicationStateChanges::kNull; }
 
-void Setup::cleanup(tgui::GuiSFML& gui) { gui.remove(setup_group_); }
+void SetupMenu::cleanup(tgui::GuiSFML& gui) { gui.remove(setup_group_); }
+SupportedApplicationStateTypes tdmon::SetupMenu::getApplicationStateType()
+    const {
+  return SupportedApplicationStateTypes::kSetupMenu;
+}
 }  // namespace tdmon

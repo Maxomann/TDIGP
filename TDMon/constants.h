@@ -17,4 +17,26 @@ struct Constants {
   static const std::string kCancelButtonText;
 
 };
+
+/**
+ * @brief The supported application states.
+*/
+enum class SupportedApplicationStateTypes {
+	kNull, // indicate that no application state is active
+	kMainMenu,
+	kSetupMenu,
+	kObserveMenu
+};
+
+/**
+ * @brief The supported application state changes.
+*/
+enum class SupportedApplicationStateChanges {
+	kNull, // request to stay in the current state
+	kPrevious, // request to return to the previous state
+	kMainMenu, // request to open the main menu
+	kSetupMenu, // request to open the setup menu
+	kObserveMenu, // request to open the observe TDMon menu
+	kClose // request to close the application
+};
 }  // namespace tdmon
