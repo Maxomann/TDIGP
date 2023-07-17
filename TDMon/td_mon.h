@@ -1,6 +1,9 @@
 #pragma once
 
 namespace tdmon {
+/**
+ * @brief The technical debt monster
+ */
 class TdMon {
  public:
   virtual ~TdMon() = default;
