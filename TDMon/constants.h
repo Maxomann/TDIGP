@@ -12,7 +12,7 @@ struct Constants {
   static const std::string kViewMascotButtonText;
   static const std::string kConnectToDataSourcesButtonText;
 
-  /* Setup Menu */
+  /* SetupMenu Menu */
   static const std::string kOkayButtonText;
   static const std::string kCancelButtonText;
 
