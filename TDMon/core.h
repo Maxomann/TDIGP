@@ -6,14 +6,31 @@
 #include <SFML/Graphics.hpp>
 #include <TGUI/Backends/SFML.hpp>
 #include <TGUI/TGUI.hpp>
+#include <concepts>
 #include <iostream>
 #include <memory>
 
+/**
+ * @brief
+ *
+ * SetupMenuType must be constructable from a reference to TdMonFactoryType.
+ * MainMenuType must inherit from ApplicationState
+ * SetupMenuType must inherit from ApplicationState
+ * ObserveMenuType must inherit from ApplicationState
+ *
+ */
 namespace tdmon {
-template <class MainMenuType, class SetupMenuType, class ObserveMenuType>
+template <class TdMonFactoryType, class MainMenuType, class SetupMenuType,
+          class ObserveMenuType>
+  requires std::constructible_from<SetupMenuType, TdMonFactoryType&> &&
+           std::derived_from<MainMenuType, ApplicationState> &&
+           std::derived_from<SetupMenuType, ApplicationState> &&
+           std::derived_from<ObserveMenuType, ApplicationState>
 class Core {
  public:
-  Core() { application_state_ = std::make_unique<MainMenuType>(); };
+  Core() : tdmon_factory_(std::make_unique<TdMonFactoryType>()) {
+    application_state_ = std::make_unique<MainMenuType>();
+  };
 
   /**
    * @brief run the application
@@ -51,6 +68,8 @@ class Core {
   sf::RenderWindow window_;
   tgui::GuiSFML gui_;
 
+  std::unique_ptr<TdMonFactoryType> tdmon_factory_ = nullptr;
+
   /**
    * @brief The previous application state. This is cached to support the
    * kPrevious state change.
@@ -60,7 +79,8 @@ class Core {
   std::unique_ptr<ApplicationState> application_state_;
 
   /**
-   * @brief Update the current application state. May trigger a switch to a different application state, if the current state requests it.
+   * @brief Update the current application state. May trigger a switch to a
+   * different application state, if the current state requests it.
    * @return return true, if the application should continue to run. Return
    * false, if the application should be closed.
    */
@@ -118,7 +138,8 @@ class Core {
         new_application_state = std::make_unique<MainMenuType>();
         break;
       case tdmon::SupportedApplicationStateTypes::kSetupMenu:
-        new_application_state = std::make_unique<SetupMenuType>();
+        new_application_state =
+            std::make_unique<SetupMenuType>(*tdmon_factory_);
         break;
       case tdmon::SupportedApplicationStateTypes::kObserveMenu:
         new_application_state = std::make_unique<ObserveMenuType>();
@@ -128,7 +149,8 @@ class Core {
         break;
     }
 
-    // record previous state type
+    // store previous state type to enable switching back to the previous state
+    // later
     previous_state_type_ = application_state_->getApplicationStateType();
 
     // change to the new state

@@ -5,16 +5,19 @@
 namespace tdmon {
 struct Constants {
   static const int kHeadingFontSize = 44;
+  static const int kLabelFontSize = 20;
   static const int kButtonFontSize = 20;
+  static const int kEditBoxFontSize = 20;
 
   /* Main Menu */
   static const std::string kApplicationNameLabelText;
   static const std::string kViewMascotButtonText;
   static const std::string kConnectToDataSourcesButtonText;
 
-  /* SetupMenu Menu */
+  /* Technical Debt Dataset Setup Menu */
   static const std::string kOkayButtonText;
   static const std::string kCancelButtonText;
+  static const std::string kPathToDatabaseInputLabelText;
 
 };
 
