@@ -87,10 +87,9 @@ class Core {
   bool updateApplicationState() {
     // Update the current application state and handle possibly requested state
     // changes
-    SupportedApplicationStateChanges requested_state_change =
-        application_state_->update();
-
-    switch (requested_state_change) {
+    switch (SupportedApplicationStateChanges requested_state_change =
+                application_state_->update();
+            requested_state_change) {
       case tdmon::SupportedApplicationStateChanges::kNull:
         // do nothing, continue with current state
         break;

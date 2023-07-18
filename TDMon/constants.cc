@@ -14,4 +14,9 @@ const std::string Constants::kCancelButtonText = "Cancel";
 
 const std::string Constants::kPathToDatabaseInputLabelText =
     "Please enter the path to the 'Technical Debt Dataset':";
+
+const std::string Constants::kBackButtonText = "Back";
+
+const std::string Constants::kRefreshButtonText = "Refresh";
+
 }

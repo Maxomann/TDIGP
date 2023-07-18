@@ -13,7 +13,9 @@ int main() {
   // using 'typename' is important here for type deduction
   tdmon::Core<
       typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory,
-      typename tdmon::MainMenu, typename tdmon::TechnicalDebtDatasetSetupMenu,
+      typename tdmon::MainMenu,
+      typename tdmon::TechnicalDebtDatasetSetupMenu<
+          typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory>,
       typename tdmon::ObserveMenu>
       core;
   core.run();

@@ -19,6 +19,9 @@ struct Constants {
   static const std::string kCancelButtonText;
   static const std::string kPathToDatabaseInputLabelText;
 
+  /* Observe Menu */
+  static const std::string kBackButtonText;
+  static const std::string kRefreshButtonText;
 };
 
 /**
