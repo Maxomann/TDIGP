@@ -22,5 +22,10 @@ class TechnicalDebtDatasetConnectableDefaultTdMonFactory
 
   // Inherited via TechnicalDebtDatasetAccessInformationContainer
   void setDatabasePath(std::filesystem::path path) override;
+
+  private:
+  std::filesystem::path path_to_db_;
+
+  bool connected_ = false;
 };
 }  // namespace tdmon

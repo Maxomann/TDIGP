@@ -5,8 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(SFML 2 COMPONENTS system window graphics network CONFIG REQUIRED)
 find_package(TGUI CONFIG REQUIRED)
 find_package(nlohmann_json REQUIRED)
-#find_package(Lua REQUIRED)
-#find_package(sol2 CONFIG REQUIRED)
+find_package(SQLiteCpp CONFIG REQUIRED)
 
 include_directories(./)
 
