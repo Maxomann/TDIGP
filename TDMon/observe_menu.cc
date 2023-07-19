@@ -1,7 +1,12 @@
 #include <TDMon/constants.h>
 #include <TDMon/observe_menu.h>
 
+#include <format>
+
 namespace tdmon {
+ObserveMenu::ObserveMenu(TdMonCache& tdmon_cache, TdMonFactory& tdmon_factory)
+    : tdmon_cache_(tdmon_cache), tdmon_factory_(tdmon_factory) {}
+
 void ObserveMenu::init(tgui::GuiSFML& gui) {
   observe_menu_group_ = tgui::Group::create();
 
@@ -33,6 +38,9 @@ void ObserveMenu::init(tgui::GuiSFML& gui) {
   observe_menu_group_->add(tdmon_data_label_);
 
   gui.add(observe_menu_group_);
+
+  // refresh the td-mon and relevant UI
+  refreshTdMon(true);
 }
 
 SupportedApplicationStateChanges ObserveMenu::update() {
@@ -46,5 +54,35 @@ void ObserveMenu::cleanup(tgui::GuiSFML& gui) {
 SupportedApplicationStateTypes ObserveMenu::getApplicationStateType() const {
   return SupportedApplicationStateTypes::kObserveMenu;
 }
-void ObserveMenu::refreshTdMon() { throw std::logic_error("not implemented"); }
+
+void ObserveMenu::refreshTdMon(bool prefer_cache) {
+  // if no cache exists OR cache should not be preferred, create a new TdMon
+  // from factory
+  if (!prefer_cache || !tdmon_cache_.hasCache()) {
+    std::unique_ptr<TdMon> td_mon = tdmon_factory_.create();
+
+    tdmon_cache_.updateCache(std::move(td_mon));
+  }
+
+  const TdMon* currentTdMon = tdmon_cache_.getCache();
+  if (!currentTdMon) {
+    throw std::exception("ObserveMenu::refreshTdMon currentTdMon is nullptr");
+  }
+
+  // convert stored timestamp to a time point, then to zoned_time (local timezone)
+  std::chrono::system_clock::time_point time_point{
+      tdmon_cache_.getLastUpdatedTimestamp()};
+  std::chrono::zoned_time zoned_time{std::chrono::current_zone(), time_point};
+
+  // update UI & visual representation of the TdMon
+  tdmon_data_label_->setText(
+      "Attack: " + std::to_string(currentTdMon->getAttackValue()) +
+      " || Defense: " + std::to_string(currentTdMon->getDefenseValue()) +
+      " || Speed: " + std::to_string(currentTdMon->getSpeedValue()) +
+      // use std::format to display the zoned_time in a 
+      "\nLast updated: " + std::format("{:%x %T}", zoned_time));
+
+  // TODO: visual representation
+}
+
 }  // namespace tdmon

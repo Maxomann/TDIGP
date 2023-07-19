@@ -24,13 +24,17 @@ namespace tdmon {
 template <class TdMonFactoryType, class TdMonCacheType, class MainMenuType,
           class SetupMenuType, class ObserveMenuType>
   requires std::constructible_from<SetupMenuType, TdMonFactoryType&> &&
+           std::constructible_from<ObserveMenuType, TdMonCacheType&,
+                                   TdMonFactoryType&> &&
            std::derived_from<TdMonCacheType, TdMonCache> &&
            std::derived_from<MainMenuType, ApplicationState> &&
            std::derived_from<SetupMenuType, ApplicationState> &&
            std::derived_from<ObserveMenuType, ApplicationState>
 class Core {
  public:
-  Core() : tdmon_factory_(std::make_unique<TdMonFactoryType>()) {
+  Core()
+      : tdmon_factory_(std::make_unique<TdMonFactoryType>()),
+        tdmon_cache_(std::make_unique<TdMonCacheType>()) {
     application_state_ = std::make_unique<MainMenuType>();
   };
 
@@ -38,6 +42,12 @@ class Core {
    * @brief run the application
    */
   void run() {
+    // try to load the cache from disk
+    if (tdmon_cache_->existsOnDisk()) {
+      tdmon_cache_->loadFromDisk();
+    }
+
+    // init window and gui
     window_.create(sf::VideoMode(600, 600), "Technical Debt Monsters!",
                    sf::Style::Close);
     gui_.setTarget(window_);
@@ -63,6 +73,11 @@ class Core {
       window_.display();
     }
 
+    // if the cache contains data, write it to disk when closing the application
+    if (tdmon_cache_->hasCache()) {
+      tdmon_cache_->storeOnDisk();
+    }
+
     application_state_->cleanup(gui_);
   };
 
@@ -71,7 +86,7 @@ class Core {
   tgui::GuiSFML gui_;
 
   std::unique_ptr<TdMonFactoryType> tdmon_factory_ = nullptr;
-  TdMonCacheType tdmon_cache_;
+  std::unique_ptr<TdMonCacheType> tdmon_cache_ = nullptr;
 
   /**
    * @brief The previous application state. This is cached to support the
@@ -144,7 +159,8 @@ class Core {
             std::make_unique<SetupMenuType>(*tdmon_factory_);
         break;
       case tdmon::SupportedApplicationStateTypes::kObserveMenu:
-        new_application_state = std::make_unique<ObserveMenuType>();
+        new_application_state =
+            std::make_unique<ObserveMenuType>(*tdmon_cache_, *tdmon_factory_);
         break;
       default:
         throw std::exception("new_state_type not supported");

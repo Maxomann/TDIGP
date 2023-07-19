@@ -5,6 +5,10 @@
 
 namespace tdmon {
 void DefaultTdMonCache::storeOnDisk() const {
+  if (!hasCache()) {
+    throw std::exception("cannot store empty cache");
+  }
+
   std::ofstream file(kCacheFilePath);
   if (!file.is_open()) {
     throw std::exception("cannot open cache file to write cache to disk");
