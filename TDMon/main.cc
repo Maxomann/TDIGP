@@ -3,6 +3,7 @@
 #include <TDMon/observe_menu.h>
 #include <TDMon/technical_debt_dataset_connectable_default_td_mon_factory.h>
 #include <TDMon/technical_debt_dataset_setup_menu.h>
+#include <TDMon/default_td_mon_cache.h>
 
 /**
  * @brief The program entry point. This function cannot be placed into the tdmon
@@ -13,6 +14,7 @@ int main() {
   // using 'typename' is important here for type deduction
   tdmon::Core<
       typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory,
+      typename tdmon::DefaultTdMonCache,
       typename tdmon::MainMenu,
       typename tdmon::TechnicalDebtDatasetSetupMenu<
           typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory>,

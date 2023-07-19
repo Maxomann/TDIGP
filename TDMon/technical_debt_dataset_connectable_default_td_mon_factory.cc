@@ -7,7 +7,7 @@
 namespace tdmon {
 std::unique_ptr<TdMon>
 TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
-  throw std::logic_error("not implemented");
+  //throw std::logic_error("not implemented");
 
   // TODO TODO!!!
 
@@ -15,7 +15,7 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
 
   // create DefaultTdMon from it
 
-  return std::make_unique<DefaultTdMon>(0, 0, 0);
+  return std::make_unique<DefaultTdMon>(100, 101, 102);
 }
 void TechnicalDebtDatasetConnectableDefaultTdMonFactory::
     connectToDataSources() {

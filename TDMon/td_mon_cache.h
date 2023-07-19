@@ -10,9 +10,11 @@ class TdMonCache {
  public:
   virtual void storeOnDisk() const = 0;
   virtual void loadFromDisk() = 0;
+  virtual bool existsOnDisk() const = 0;
 
   virtual void updateCache(std::unique_ptr<TdMon> data) = 0;
 
+  virtual bool hasCache() const = 0;
   virtual TdMon* getCache() const = 0;
 
   /**

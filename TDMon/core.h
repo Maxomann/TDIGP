@@ -2,6 +2,7 @@
 
 #include <TDMon/application_state.h>
 #include <TDMon/constants.h>
+#include <TDMon/td_mon_cache.h>
 
 #include <SFML/Graphics.hpp>
 #include <TGUI/Backends/SFML.hpp>
@@ -20,9 +21,10 @@
  *
  */
 namespace tdmon {
-template <class TdMonFactoryType, class MainMenuType, class SetupMenuType,
-          class ObserveMenuType>
+template <class TdMonFactoryType, class TdMonCacheType, class MainMenuType,
+          class SetupMenuType, class ObserveMenuType>
   requires std::constructible_from<SetupMenuType, TdMonFactoryType&> &&
+           std::derived_from<TdMonCacheType, TdMonCache> &&
            std::derived_from<MainMenuType, ApplicationState> &&
            std::derived_from<SetupMenuType, ApplicationState> &&
            std::derived_from<ObserveMenuType, ApplicationState>
@@ -69,6 +71,7 @@ class Core {
   tgui::GuiSFML gui_;
 
   std::unique_ptr<TdMonFactoryType> tdmon_factory_ = nullptr;
+  TdMonCacheType tdmon_cache_;
 
   /**
    * @brief The previous application state. This is cached to support the

@@ -1,11 +1,15 @@
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 namespace tdmon {
 /**
  * @brief The technical debt monster
  */
 class TdMon {
  public:
+  static const std::string kJsonTypeIdentifierKey;
+
   virtual ~TdMon() = default;
 
   virtual unsigned int getLevel() const = 0;
@@ -13,5 +17,7 @@ class TdMon {
   virtual unsigned int getAttackValue() const = 0;
   virtual unsigned int getDefenseValue() const = 0;
   virtual unsigned int getSpeedValue() const = 0;
+
+  virtual nlohmann::json toJson() const = 0;
 };
 }  // namespace tdmon
