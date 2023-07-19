@@ -7,6 +7,10 @@
 namespace tdmon {
 class ObserveMenu : public ApplicationState {
  public:
+  static const std::string kLowLevelTexturePath;
+  static const std::string kMediumLevelTexturePath;
+  static const std::string kHighLevelTexturePath;
+
   ObserveMenu(TdMonCache& tdmon_cache, TdMonFactory& tdmon_factory);
 
   // Inherited via ApplicationState
@@ -18,6 +22,8 @@ class ObserveMenu : public ApplicationState {
  private:
   TdMonCache& tdmon_cache_;
   TdMonFactory& tdmon_factory_;
+
+  sf::Texture tdmon_visual_representation_;
 
   SupportedApplicationStateChanges next_application_state_change_ =
       SupportedApplicationStateChanges::kNull;

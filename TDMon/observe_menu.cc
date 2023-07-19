@@ -28,7 +28,7 @@ void ObserveMenu::init(tgui::GuiSFML& gui) {
   observe_menu_group_->add(refresh_button_);
 
   tdmon_picture_ = tgui::Picture::create();
-  tdmon_picture_->setPosition(50, 100);
+  tdmon_picture_->setPosition(100, 100);
   tdmon_picture_->setSize(400, 400);
   observe_menu_group_->add(tdmon_picture_);
 
@@ -83,7 +83,16 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
       // use std::format to display the zoned_time in a 
       "\nLast updated: " + std::format("{:%x %T}", zoned_time));
 
-  // TODO: visual representation
+  // visual representation
+
+  // TODO!!!!
+  tdmon_visual_representation_.loadFromFile("./data/flamelings.png");
+  tdmon_picture_->getRenderer()->setTexture(tdmon_visual_representation_);
+
 }
+
+const std::string ObserveMenu::kLowLevelTexturePath = "./data/tex0.png";
+const std::string ObserveMenu::kMediumLevelTexturePath = "./data/tex1.png";
+const std::string ObserveMenu::kHighLevelTexturePath = "./data/tex2.png";
 
 }  // namespace tdmon

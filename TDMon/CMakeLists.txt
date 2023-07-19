@@ -6,3 +6,16 @@ tgui
 nlohmann_json::nlohmann_json
 SQLiteCpp
 )
+
+# remove the old data dir before copying the new one
+add_custom_command(
+	TARGET TDMon PRE_BUILD
+	COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:TDMon>/data"
+)
+
+# copy the data dir to the output directory in PRE_BUILD step
+add_custom_command(
+	TARGET TDMon PRE_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	"${CMAKE_SOURCE_DIR}/data/" "$<TARGET_FILE_DIR:TDMon>/data"
+)
