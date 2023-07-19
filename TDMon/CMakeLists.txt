@@ -5,7 +5,4 @@ sfml-graphics sfml-window sfml-network sfml-audio
 tgui
 nlohmann_json::nlohmann_json
 SQLiteCpp
-sqlite3 # required for SQLiteCpp
-pthread # required for SQLiteCpp
-dl # required for SQLiteCpp
 )
