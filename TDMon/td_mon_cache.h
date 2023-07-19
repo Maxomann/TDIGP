@@ -19,8 +19,8 @@ class TdMonCache {
 
   /**
    * @brief Get the timestamp when the cache was last updated.
-   * @return The seconds since UNIX epoch when the chache was last updated.
+   * @return The microseconds since UNIX epoch when the chache was last updated.
    */
-  virtual std::chrono::seconds getLastUpdatedTimestamp() const = 0;
+  virtual std::chrono::microseconds getLastUpdatedTimestamp() const = 0;
 };
 }  // namespace tdmon

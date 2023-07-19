@@ -76,7 +76,8 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
 
   // update UI & visual representation of the TdMon
   tdmon_data_label_->setText(
-      "Attack: " + std::to_string(currentTdMon->getAttackValue()) +
+      "Level: " + std::to_string(currentTdMon->getLevel()) +
+      "\nAttack: " + std::to_string(currentTdMon->getAttackValue()) +
       " || Defense: " + std::to_string(currentTdMon->getDefenseValue()) +
       " || Speed: " + std::to_string(currentTdMon->getSpeedValue()) +
       // use std::format to display the zoned_time in a 

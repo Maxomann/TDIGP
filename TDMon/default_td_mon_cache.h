@@ -21,11 +21,12 @@ class DefaultTdMonCache : public TdMonCache {
   TdMon* getCache() const override;
   bool hasCache() const override;
 
-  std::chrono::seconds getLastUpdatedTimestamp() const override;
+  std::chrono::microseconds getLastUpdatedTimestamp() const override;
 
  private:
   std::unique_ptr<TdMon> cache_ = nullptr;
 
-  std::chrono::seconds last_updated_timestamp_ = std::chrono::seconds(0);
+  std::chrono::microseconds last_updated_timestamp_ =
+      std::chrono::microseconds(0);
 };
 }  // namespace tdmon

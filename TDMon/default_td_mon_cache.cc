@@ -36,8 +36,8 @@ void DefaultTdMonCache::loadFromDisk() {
     // deserialize default td-mon
     cache_ = DefaultTdMon::fromJson(json);
     // deserialize lsat updated timestamp
-    last_updated_timestamp_ =
-        std::chrono::seconds(json.at(kTimestampKeyString).get<long long>());
+    last_updated_timestamp_ = std::chrono::microseconds(
+        json.at(kTimestampKeyString).get<long long>());
   } else {
     throw std::exception(
         "td-mon type not suppoted for deserialization in DefaultTdMonCache");
@@ -48,13 +48,14 @@ void DefaultTdMonCache::updateCache(std::unique_ptr<TdMon> data) {
   cache_ = std::move(data);
 
   // update the "last updated" timestamp to the current seconds since Unix epoch
-  last_updated_timestamp_ = std::chrono::duration_cast<std::chrono::seconds>(
-      std::chrono::system_clock::now().time_since_epoch());
+  last_updated_timestamp_ =
+      std::chrono::duration_cast<std::chrono::microseconds>(
+          std::chrono::system_clock::now().time_since_epoch());
 }
 
 TdMon* DefaultTdMonCache::getCache() const { return cache_.get(); }
 
-std::chrono::seconds DefaultTdMonCache::getLastUpdatedTimestamp() const {
+std::chrono::microseconds DefaultTdMonCache::getLastUpdatedTimestamp() const {
   return last_updated_timestamp_;
 }
 bool DefaultTdMonCache::hasCache() const { return cache_ != nullptr; }
