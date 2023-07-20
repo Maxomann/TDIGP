@@ -85,8 +85,7 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
 
   // visual representation
 
-  // TODO!!!!
-  tdmon_visual_representation_.loadFromFile("./data/flamelings.png");
+  tdmon_visual_representation_.loadFromFile(currentTdMon->getTexturePath());
   tdmon_picture_->getRenderer()->setTexture(tdmon_visual_representation_);
 
 }

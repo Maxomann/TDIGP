@@ -42,8 +42,24 @@ std::unique_ptr<TdMon> DefaultTdMon::fromJson(nlohmann::json json) {
       json.at(kSpeedKeyString).get<unsigned int>());
 }
 
+const std::string& DefaultTdMon::getTexturePath()const {
+  if (getLevel() >= kLevelCap2) {
+    return kPathToTex2;
+  } else if (getLevel() >= kLevelCap1) {
+    return kPathToTex1;
+  } else {
+    return kPathToTex0;
+  }
+}
+
 const std::string DefaultTdMon::kTypeIdentifierString = "DefaultTdMon";
 const std::string DefaultTdMon::kAttackKeyString = "Attack";
 const std::string DefaultTdMon::kDefenseKeyString = "Defense";
 const std::string DefaultTdMon::kSpeedKeyString = "Speed";
+
+const std::string DefaultTdMon::kPathToTex0 = "./data/tex0.png";
+const std::string DefaultTdMon::kPathToTex1 = "./data/tex1.png";
+const std::string DefaultTdMon::kPathToTex2 = "./data/tex2.png";
+
+
 }  // namespace tdmon
