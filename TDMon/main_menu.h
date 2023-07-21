@@ -30,22 +30,69 @@
 #include <string>
 
 namespace tdmon {
+/**
+ * @brief The main menu ApplicationState. Responsible for allowing the user to
+ * select which Use-Case to access.
+ */
 class MainMenu : public ApplicationState {
  public:
   // Inherited via ApplicationState
+
+  /**
+   * @brief Implementation of the init function from ApplicationState.
+   * Initializes the gui and gui callbacks.
+   * @param gui The gui.
+   */
   void init(tgui::GuiSFML& gui) override;
+
+  /**
+   * @brief Implementation of the update function from ApplicationState
+   * @return The application state to change to
+   */
   SupportedApplicationStateChanges update() override;
+
+  /**
+   * @brief Implementation of the cleanup function from ApplicationState.
+   * Removes the gui elements that were added in init()
+   * @param gui The gui
+   */
   void cleanup(tgui::GuiSFML& gui) override;
+
+  /**
+   * @brief Get this classes application state type
+   * @return The application state type
+   */
   SupportedApplicationStateTypes getApplicationStateType() const override;
 
  private:
-  SupportedApplicationStateChanges next_application_state_change_ = SupportedApplicationStateChanges::kNull;
+  /**
+   * @brief Store the next application state change to be requested in update().
+   * kNull by default (stay in this state). Ui callbacks may change this value
+   * dependin on which button is pressed.
+   */
+  SupportedApplicationStateChanges next_application_state_change_ =
+      SupportedApplicationStateChanges::kNull;
 
+  /**
+   * @brief The main menu group ui element
+  */
   tgui::Group::Ptr main_menu_group_ = nullptr;
+  /**
+   * @brief The main name label ui element
+  */
   tgui::Label::Ptr main_name_label_ = nullptr;
 
+  /**
+   * @brief The button layout ui element
+  */
   tgui::VerticalLayout::Ptr button_layout_ = nullptr;
+  /**
+   * @brief The view mascot (td-mon) button ui element 
+  */
   tgui::Button::Ptr view_mascot_button_ = nullptr;
+  /**
+   * @brief The 'connect to data sources' (setup) button ui element
+  */
   tgui::Button::Ptr connect_to_data_sources_button_ = nullptr;
 };
 }  // namespace tdmon

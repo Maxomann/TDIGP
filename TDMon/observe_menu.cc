@@ -84,10 +84,10 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
   // from factory
   if (!prefer_cache || !tdmon_cache_.hasCache()) {
     try {
-    std::unique_ptr<TdMon> td_mon = tdmon_factory_.create();
-    tdmon_cache_.updateCache(std::move(td_mon));
-    } catch (std::exception e){
-    std::cout << "error while updating TD-Mon: " << e.what() << std::endl;
+      std::unique_ptr<TdMon> td_mon = tdmon_factory_.create();
+      tdmon_cache_.updateCache(std::move(td_mon));
+    } catch (std::exception e) {
+      std::cout << "error while updating TD-Mon: " << e.what() << std::endl;
     }
   }
 
@@ -96,7 +96,8 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
     throw std::exception("ObserveMenu::refreshTdMon currentTdMon is nullptr");
   }
 
-  // convert stored timestamp to a time point, then to zoned_time (local timezone)
+  // convert stored timestamp to a time point, then to zoned_time (local
+  // timezone)
   std::chrono::system_clock::time_point time_point{
       tdmon_cache_.getLastUpdatedTimestamp()};
   std::chrono::zoned_time zoned_time{std::chrono::current_zone(), time_point};
@@ -107,18 +108,12 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
       "\nAttack: " + std::to_string(currentTdMon->getAttackValue()) +
       " || Defense: " + std::to_string(currentTdMon->getDefenseValue()) +
       " || Speed: " + std::to_string(currentTdMon->getSpeedValue()) +
-      // use std::format to display the zoned_time in a 
+      // use std::format to display the zoned_time in a
       "\nLast updated: " + std::format("{:%x %T}", zoned_time));
 
   // visual representation
 
   tdmon_visual_representation_.loadFromFile(currentTdMon->getTexturePath());
   tdmon_picture_->getRenderer()->setTexture(tdmon_visual_representation_);
-
 }
-
-const std::string ObserveMenu::kLowLevelTexturePath = "./data/tex0.png";
-const std::string ObserveMenu::kMediumLevelTexturePath = "./data/tex1.png";
-const std::string ObserveMenu::kHighLevelTexturePath = "./data/tex2.png";
-
 }  // namespace tdmon
