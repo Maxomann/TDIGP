@@ -30,26 +30,73 @@
 #include <chrono>
 
 namespace tdmon {
+/**
+ * @brief The default implementation of the TdMonCache. This implementation
+ * currently only supports serialization/deserialization of DefaultTdMon
+ * objects
+ */
 class DefaultTdMonCache : public TdMonCache {
  public:
+  /**
+   * @brief The path to the cache file location on disk.
+   */
   static const std::string kCacheFilePath;
 
+  /**
+   * @brief The json key for the timestamp value.
+   */
   static const std::string kTimestampKeyString;
 
   // Inherited via TdMonCache
+
+  /**
+   * @brief Stores the current cache to disk
+   */
   void storeOnDisk() const override;
+
+  /**
+   * @brief Loads the current cache from disk
+   */
   void loadFromDisk() override;
+
+  /**
+   * @brief Check whether the cache exists on disk
+   * @return true if "./cache.json" exists
+   */
   bool existsOnDisk() const override;
 
+  /**
+   * @brief Update the cache with data. Note that this does not yet write the
+   * cache to disk. It only updates the internal cache.
+   * @param data The td-mon to store in cache.
+   */
   void updateCache(std::unique_ptr<TdMon> data) override;
+  /**
+   * @brief Get the currently cache td-mon
+   * @return A pointer to the td-mon. Returns nullptr if no internal cache exists.
+  */
   TdMon* getCache() const override;
+  /**
+   * @brief Check whether an internal cache exists
+   * @return true if it does
+  */
   bool hasCache() const override;
 
+  /**
+   * @brief Get the timestamp of when the cache was last updated
+   * @return The timestamp in microseconds since unix epoch
+  */
   std::chrono::microseconds getLastUpdatedTimestamp() const override;
 
  private:
+  /**
+   * @brief The cache
+  */
   std::unique_ptr<TdMon> cache_ = nullptr;
 
+  /**
+   * @brief The timestamp when the cache was last updated in microseconds since unix epoch.
+  */
   std::chrono::microseconds last_updated_timestamp_ =
       std::chrono::microseconds(0);
 };

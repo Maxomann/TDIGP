@@ -35,8 +35,10 @@
 #include <iostream>
 #include <memory>
 
+namespace tdmon {
 /**
- * @brief
+ * @brief The core of the application. Handles the window, gui and application
+ * states.
  *
  * SetupMenuType must be constructable from a reference to TdMonFactoryType.
  * MainMenuType must inherit from ApplicationState
@@ -44,7 +46,6 @@
  * ObserveMenuType must inherit from ApplicationState
  *
  */
-namespace tdmon {
 template <class TdMonFactoryType, class TdMonCacheType, class MainMenuType,
           class SetupMenuType, class ObserveMenuType>
   requires std::constructible_from<SetupMenuType, TdMonFactoryType&> &&
@@ -56,6 +57,10 @@ template <class TdMonFactoryType, class TdMonCacheType, class MainMenuType,
            std::derived_from<ObserveMenuType, ApplicationState>
 class Core {
  public:
+  /**
+   * @brief The constructor. Creates instances of the dependencies passed via
+   * template arguments (dependency injection to follow SOLID)
+   */
   Core()
       : tdmon_factory_(std::make_unique<TdMonFactoryType>()),
         tdmon_cache_(std::make_unique<TdMonCacheType>()) {
@@ -106,10 +111,22 @@ class Core {
   };
 
  private:
+  /**
+   * @brief The window.
+   */
   sf::RenderWindow window_;
+  /**
+   * @brief The gui
+   */
   tgui::GuiSFML gui_;
 
+  /**
+   * @brief The TdMonFactory to use in the application.
+   */
   std::unique_ptr<TdMonFactoryType> tdmon_factory_ = nullptr;
+  /**
+   * @brief The TdMonCache to use in the application.
+   */
   std::unique_ptr<TdMonCacheType> tdmon_cache_ = nullptr;
 
   /**
@@ -118,6 +135,9 @@ class Core {
    */
   SupportedApplicationStateTypes previous_state_type_ =
       SupportedApplicationStateTypes::kNull;
+  /**
+   * @brief The current application state
+   */
   std::unique_ptr<ApplicationState> application_state_;
 
   /**

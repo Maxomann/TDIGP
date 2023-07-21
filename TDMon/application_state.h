@@ -19,7 +19,7 @@
  * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  *********************************/
 
 #pragma once
@@ -29,10 +29,22 @@
 #include <TGUI/TGUI.hpp>
 
 namespace tdmon {
+/**
+ * @brief Interface for all states of the application.
+ */
 class ApplicationState {
  public:
+  /**
+   * @brief Virtual default destructor to allow deletion of derived classes
+   * from a pointer to this class
+   */
   virtual ~ApplicationState() = default;
 
+  /**
+   * @brief Initialize this application state. Add gui elements to the gui
+   * object.
+   * @param gui The gui
+   */
   virtual void init(tgui::GuiSFML& gui) = 0;
 
   /**
@@ -42,8 +54,17 @@ class ApplicationState {
    */
   virtual SupportedApplicationStateChanges update() = 0;
 
+  /**
+   * @brief Remove gui elements which were added in init(). Also do other
+   * cleanup, if applicable.
+   * @param gui
+   */
   virtual void cleanup(tgui::GuiSFML& gui) = 0;
 
+  /**
+   * @brief Get the type of application state for this object
+   * @return The application state type for this object
+   */
   virtual SupportedApplicationStateTypes getApplicationStateType() const = 0;
 };
 }  // namespace tdmon

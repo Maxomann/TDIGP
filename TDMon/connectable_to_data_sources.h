@@ -25,12 +25,35 @@
 #pragma once
 
 namespace tdmon {
+/**
+ * @brief Interface for any class that supports connection to one or multiple
+ * data source(s) (sql database, Jira, etc...)
+ */
 class ConnectableToDataSources {
  public:
+  /**
+   * @brief Virtual default destructor to allow deletion of derived classes
+   * from a pointer to this class
+   */
   virtual ~ConnectableToDataSources() = default;
 
+  /**
+   * @brief Establish a connection to the data sources.
+   */
   virtual void connectToDataSources() = 0;
+
+  /**
+   * @brief Get whether the required access information is available. This might
+   * be login information like username and password, or a path to a sql
+   * database for example.
+   * @return true if available
+   */
   virtual bool isRequiredDataAccessInformationAvailable() = 0;
+
+  /**
+   * @brief Get whether the object is currently connected to the data sources.
+   * @return
+   */
   virtual bool isConnectedToDataSources() = 0;
 };
 }  // namespace tdmon

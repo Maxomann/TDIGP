@@ -27,12 +27,32 @@
 #include <TDMon/td_mon.h>
 
 namespace tdmon {
+/**
+ * @brief Implementation of the default TD-Mon. Has fixed paths to textures and
+ * level caps for different version of the textures.
+ */
 class DefaultTdMon : public TdMon {
  public:
+  /**
+   * @brief This classes type identifier string. (Required for
+   * serialization/deserialization of classes derived form TdMon)
+   */
   static const std::string kTypeIdentifierString;
 
+  /**
+   * @brief The key string for the attack value when serializing this class to
+   * json
+   */
   static const std::string kAttackKeyString;
+  /**
+   * @brief The key string for the defense value when serializing this class to
+   * json
+   */
   static const std::string kDefenseKeyString;
+  /**
+   * @brief The key string for the speed value when serializing this class to
+   * json
+   */
   static const std::string kSpeedKeyString;
 
   /**
@@ -60,23 +80,72 @@ class DefaultTdMon : public TdMon {
    */
   static const unsigned int kLevelCap2 = 20;
 
+  /**
+   * @brief The constructor.
+   * @param attack_value The attack value for this td-mon
+   * @param defense_value The defense value for this td-mon
+   * @param speed_value The speed value for this td-mon
+   */
   DefaultTdMon(unsigned int attack_value, unsigned int defense_value,
                unsigned int speed_value);
 
   // Inherited via TdMon
+
+  /**
+   * @brief Get the level. This is calculated as the average of attack, defense and speed.
+   * @return The level
+   */
   unsigned int getLevel() const override;
+  /**
+   * @brief Get the attack value
+   * @return The attack value
+   */
   unsigned int getAttackValue() const override;
+  /**
+   * @brief Get the defense value
+   * @return The defense value
+   */
   unsigned int getDefenseValue() const override;
+  /**
+   * @brief Get the speed value
+   * @return The speed value
+   */
   unsigned int getSpeedValue() const override;
 
+  /**
+   * @brief Serialize this object to json. This includes attack, defense and
+   * speed values, as well as a type identifier string stored with key:
+   * DefualtTdMon::kJsonTypeIdentifierKey
+   * @return The json.
+   */
   nlohmann::json toJson() const override;
+
+  /**
+   * @brief Create a new DefaultTdMon from json
+   * @param json The json to create from
+   * @return The created object
+   */
   static std::unique_ptr<TdMon> fromJson(nlohmann::json json);
 
-  const std::string& getTexturePath()const override;
+  /**
+   * @brief Get the current texture path. This may change depending on the level
+   * of the td-mon.
+   * @return The relative texture path.
+   */
+  const std::string& getTexturePath() const override;
 
  private:
+  /**
+   * @brief The attack value
+   */
   unsigned int attack_value_ = 0;
+  /**
+   * @brief The defense value
+   */
   unsigned int defense_value_ = 0;
+  /**
+   * @brief The speed value
+   */
   unsigned int speed_value_ = 0;
 };
 }  // namespace tdmon

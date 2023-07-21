@@ -27,30 +27,79 @@
 #include <string>
 
 namespace tdmon {
+/**
+ * @brief Global UI constants for the application. E.g. text strings or font
+ * size.
+ */
 struct UiConstants {
+  /**
+   * @brief Font size for headings
+   */
   static const int kHeadingFontSize = 44;
+  /**
+   * @brief Font size for labels
+   */
   static const int kLabelFontSize = 20;
+  /**
+   * @brief Font size for text in buttons
+   */
   static const int kButtonFontSize = 20;
+  /**
+   * @brief Font size for text in edit boxes
+   */
   static const int kEditBoxFontSize = 20;
 
-  /* Main Menu */
+  /*** Main Menu ***/
+
+  /**
+   * @brief The application name label text string
+   */
   static const std::string kApplicationNameLabelText;
+  /**
+   * @brief The view mascot (td-mon) button text string
+   */
   static const std::string kViewMascotButtonText;
+  /**
+   * @brief The 'connect to data sources' button text string
+   */
   static const std::string kConnectToDataSourcesButtonText;
 
-  /* Technical Debt Dataset Setup Menu */
+  /*** Technical Debt Dataset Setup Menu ***/
+
+  /**
+   * @brief The okay button text string
+   */
   static const std::string kOkayButtonText;
+  /**
+   * @brief The cancel button text string
+   */
   static const std::string kCancelButtonText;
+  /**
+   * @brief The 'path-to-database' input label text string
+   */
   static const std::string kPathToDatabaseInputLabelText;
+  /**
+   * @brief The 'user-identifier' input label text string
+   */
   static const std::string kUserIdentifierInputLabelText;
 
-  /* Observe Menu */
+  /*** Observe Menu ***/
+
+  /**
+   * @brief The back button text string
+   */
   static const std::string kBackButtonText;
+  /**
+   * @brief The refresh button text string
+   */
   static const std::string kRefreshButtonText;
 };
 
 /**
  * @brief The supported application states.
+ *
+ * This is required to allow dependency injection through templates in the core,
+ * while still being able to switch between different 'types' of states.
  */
 enum class SupportedApplicationStateTypes {
   kNull,  // indicate that no application state is active

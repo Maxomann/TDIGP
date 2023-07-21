@@ -25,6 +25,8 @@
 #include <TDMon/constants.h>
 
 namespace tdmon {
+// initialize the UiConstants. This cannot be done in-class for strings.
+
 const std::string UiConstants::kApplicationNameLabelText =
     "Technical Debt Monsters!";
 

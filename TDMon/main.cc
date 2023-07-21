@@ -44,6 +44,8 @@ int main() {
           typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory>,
       typename tdmon::ObserveMenu>
       core;
+
+  // run the application
   core.run();
 
   return 0;
