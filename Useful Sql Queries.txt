@@ -1,0 +1,20 @@
+-- select relevant rows
+SELECT * FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation' OR Type='Improvement')
+
+-- select most common reporter(s)
+SELECT REPORTER, COUNT(REPORTER) AS REPORTER_OCCURRENCE FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation' OR Type='Improvement') GROUP BY REPORTER ORDER BY REPORTER_OCCURRENCE DESC LIMIT 10
+
+-- select most common reporter(s) - NO 'Improvement' Issues
+SELECT REPORTER, COUNT(REPORTER) AS REPORTER_OCCURRENCE FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation') GROUP BY REPORTER ORDER BY REPORTER_OCCURRENCE DESC LIMIT 10
+
+-- select issues for reporter
+SELECT * FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation') AND Reporter='jcamachorodriguez'
+
+-- select issues closed by x
+SELECT * FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation') AND assignee='jcamachorodriguez' AND resolution_date IS NOT '' ORDER BY reporter DESC
+
+-- select issues opened by x
+SELECT * FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation') AND Reporter='jcamachorodriguez'
+
+-- cumulate watch count for issues opened by x
+SELECT SUM(watch_count) FROM JIRA_ISSUES WHERE (Type='Test' OR Type='Documentation') AND assignee='jcamachorodriguez' ORDER BY reporter DESC

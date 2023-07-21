@@ -8,5 +8,5 @@
     "nlohmann-json",
     "sqlitecpp"
   ],
-  "builtin-baseline": "861c33057553ee836e7061ffbdabc25ea343145d"
+  "builtin-baseline": "50a4aa2be9c05e16d34c98369a8e1dd01796c3f0"
 }

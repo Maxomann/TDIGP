@@ -5,8 +5,8 @@
 namespace tdmon {
 void MainMenu::init(tgui::GuiSFML& gui) {
   main_menu_group_ = tgui::Group::create();
-  main_name_label_ = tgui::Label::create(Constants::kApplicationNameLabelText);
-  main_name_label_->setTextSize(Constants::kHeadingFontSize);
+  main_name_label_ = tgui::Label::create(UiConstants::kApplicationNameLabelText);
+  main_name_label_->setTextSize(UiConstants::kHeadingFontSize);
   main_name_label_->setPosition("(parent.width - width) / 2", 20.0f);
   main_menu_group_->add(main_name_label_);
 
@@ -14,16 +14,16 @@ void MainMenu::init(tgui::GuiSFML& gui) {
   button_layout_->setSize({"70%", 200.0f});
   button_layout_->setPosition("(parent.size - size) / 2");
 
-  view_mascot_button_ = tgui::Button::create(Constants::kViewMascotButtonText);
-  view_mascot_button_->setTextSize(Constants::kButtonFontSize);
+  view_mascot_button_ = tgui::Button::create(UiConstants::kViewMascotButtonText);
+  view_mascot_button_->setTextSize(UiConstants::kButtonFontSize);
   view_mascot_button_->onPress.connect([&]() {
     next_application_state_change_ =
         SupportedApplicationStateChanges::kObserveMenu;
   });
   button_layout_->add(view_mascot_button_);
   connect_to_data_sources_button_ =
-      tgui::Button::create(Constants::kConnectToDataSourcesButtonText);
-  connect_to_data_sources_button_->setTextSize(Constants::kButtonFontSize);
+      tgui::Button::create(UiConstants::kConnectToDataSourcesButtonText);
+  connect_to_data_sources_button_->setTextSize(UiConstants::kButtonFontSize);
   connect_to_data_sources_button_->onPress.connect([&]() {
     next_application_state_change_ =
         SupportedApplicationStateChanges::kSetupMenu;

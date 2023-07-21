@@ -29,12 +29,12 @@ class DefaultTdMon : public TdMon {
    * @brief If a TD-Mons level is bigger than kLevelCap1, it will return it's
    * "medium" form texture in getTexturePath()
    */
-  static const unsigned int kLevelCap1 = 20;
+  static const unsigned int kLevelCap1 = 10;
   /**
    * @brief If a TD-Mons level is bigger than kLevelCap2, it will return it's
    * "strong" form texture in getTexturePath()
    */
-  static const unsigned int kLevelCap2 = 50;
+  static const unsigned int kLevelCap2 = 20;
 
   DefaultTdMon(unsigned int attack_value, unsigned int defense_value,
                unsigned int speed_value);

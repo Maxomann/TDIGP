@@ -61,5 +61,4 @@ const std::string DefaultTdMon::kPathToTex0 = "./data/tex0.png";
 const std::string DefaultTdMon::kPathToTex1 = "./data/tex1.png";
 const std::string DefaultTdMon::kPathToTex2 = "./data/tex2.png";
 
-
 }  // namespace tdmon

@@ -3,7 +3,7 @@
 #include <string>
 
 namespace tdmon {
-struct Constants {
+struct UiConstants {
   static const int kHeadingFontSize = 44;
   static const int kLabelFontSize = 20;
   static const int kButtonFontSize = 20;
@@ -18,6 +18,7 @@ struct Constants {
   static const std::string kOkayButtonText;
   static const std::string kCancelButtonText;
   static const std::string kPathToDatabaseInputLabelText;
+  static const std::string kUserIdentifierInputLabelText;
 
   /* Observe Menu */
   static const std::string kBackButtonText;

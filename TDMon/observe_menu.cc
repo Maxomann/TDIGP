@@ -10,20 +10,20 @@ ObserveMenu::ObserveMenu(TdMonCache& tdmon_cache, TdMonFactory& tdmon_factory)
 void ObserveMenu::init(tgui::GuiSFML& gui) {
   observe_menu_group_ = tgui::Group::create();
 
-  back_button_ = tgui::Button::create(Constants::kBackButtonText);
+  back_button_ = tgui::Button::create(UiConstants::kBackButtonText);
   back_button_->setPosition(0, 0);
   back_button_->setSize(100, 50);
-  back_button_->setTextSize(Constants::kButtonFontSize);
+  back_button_->setTextSize(UiConstants::kButtonFontSize);
   back_button_->onPress.connect([&]() {
     next_application_state_change_ =
         SupportedApplicationStateChanges::kMainMenu;
   });
   observe_menu_group_->add(back_button_);
 
-  refresh_button_ = tgui::Button::create(Constants::kRefreshButtonText);
+  refresh_button_ = tgui::Button::create(UiConstants::kRefreshButtonText);
   refresh_button_->setPosition("parent.width - width", 0);
   refresh_button_->setSize(100, 50);
-  refresh_button_->setTextSize(Constants::kButtonFontSize);
+  refresh_button_->setTextSize(UiConstants::kButtonFontSize);
   refresh_button_->onPress.connect([&]() { refreshTdMon(); });
   observe_menu_group_->add(refresh_button_);
 
@@ -33,7 +33,7 @@ void ObserveMenu::init(tgui::GuiSFML& gui) {
   observe_menu_group_->add(tdmon_picture_);
 
   tdmon_data_label_ = tgui::Label::create("No data");
-  tdmon_data_label_->setTextSize(Constants::kLabelFontSize);
+  tdmon_data_label_->setTextSize(UiConstants::kLabelFontSize);
   tdmon_data_label_->setPosition(0, 520);
   observe_menu_group_->add(tdmon_data_label_);
 
@@ -59,9 +59,12 @@ void ObserveMenu::refreshTdMon(bool prefer_cache) {
   // if no cache exists OR cache should not be preferred, create a new TdMon
   // from factory
   if (!prefer_cache || !tdmon_cache_.hasCache()) {
+    try {
     std::unique_ptr<TdMon> td_mon = tdmon_factory_.create();
-
     tdmon_cache_.updateCache(std::move(td_mon));
+    } catch (std::exception e){
+    std::cout << "error while updating TD-Mon: " << e.what() << std::endl;
+    }
   }
 
   const TdMon* currentTdMon = tdmon_cache_.getCache();

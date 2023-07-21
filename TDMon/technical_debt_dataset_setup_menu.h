@@ -32,25 +32,37 @@ class TechnicalDebtDatasetSetupMenu : public ApplicationState {
     setup_form_layout_ = tgui::VerticalLayout::create();
     setup_group_->add(setup_form_layout_);
 
-    path_to_database_label =
-        tgui::Label::create(Constants::kPathToDatabaseInputLabelText);
-    path_to_database_label->setTextSize(Constants::kLabelFontSize);
-    setup_form_layout_->add(path_to_database_label);
+    path_to_database_label_ =
+        tgui::Label::create(UiConstants::kPathToDatabaseInputLabelText);
+    path_to_database_label_->setTextSize(UiConstants::kLabelFontSize);
+    setup_form_layout_->add(path_to_database_label_);
 
-    path_to_database_input = tgui::EditBox::create();
-    path_to_database_input->setTextSize(Constants::kEditBoxFontSize);
-    setup_form_layout_->add(path_to_database_input);
+    path_to_database_input_ = tgui::EditBox::create();
+    path_to_database_input_->setTextSize(UiConstants::kEditBoxFontSize);
+    setup_form_layout_->add(path_to_database_input_);
 
-    ok_button_ = tgui::Button::create(Constants::kOkayButtonText);
-    ok_button_->setTextSize(Constants::kButtonFontSize);
+    user_identifier_label =
+        tgui::Label::create(UiConstants::kUserIdentifierInputLabelText);
+    user_identifier_label->setTextSize(UiConstants::kLabelFontSize);
+    setup_form_layout_->add(user_identifier_label);
+
+    user_identifier_input = tgui::EditBox::create();
+    user_identifier_input->setTextSize(UiConstants::kEditBoxFontSize);
+    setup_form_layout_->add(user_identifier_input);
+
+    ok_button_ = tgui::Button::create(UiConstants::kOkayButtonText);
+    ok_button_->setTextSize(UiConstants::kButtonFontSize);
     ok_button_->onPress.connect([&]() {
       // retrieve the path to the database from the EditBox as a tgui::String
-      const tgui::String& input_string = path_to_database_input->getText();
+      const tgui::String& input_string = path_to_database_input_->getText();
       // convert the string to a path object
       std::filesystem::path input_path(input_string.toAnsiString());
 
       // set the database path in the information destination
       factory_to_setup_.setDatabasePath(input_path);
+
+      // set the user identifier to use when querying the sql database
+      factory_to_setup_.setUserIdentifier(user_identifier_input->getText().toAnsiString());
 
       // check if all needed information is available
       if (factory_to_setup_.isRequiredDataAccessInformationAvailable()) {
@@ -78,8 +90,8 @@ class TechnicalDebtDatasetSetupMenu : public ApplicationState {
     });
     setup_form_layout_->add(ok_button_);
 
-    cancel_button_ = tgui::Button::create(Constants::kCancelButtonText);
-    cancel_button_->setTextSize(Constants::kButtonFontSize);
+    cancel_button_ = tgui::Button::create(UiConstants::kCancelButtonText);
+    cancel_button_->setTextSize(UiConstants::kButtonFontSize);
     cancel_button_->onPress.connect([&]() {
       next_application_state_change_ =
           SupportedApplicationStateChanges::kPrevious;
@@ -107,8 +119,11 @@ class TechnicalDebtDatasetSetupMenu : public ApplicationState {
 
   tgui::VerticalLayout::Ptr setup_form_layout_ = nullptr;
 
-  tgui::Label::Ptr path_to_database_label = nullptr;
-  tgui::EditBox::Ptr path_to_database_input = nullptr;
+  tgui::Label::Ptr path_to_database_label_ = nullptr;
+  tgui::EditBox::Ptr path_to_database_input_ = nullptr;
+
+  tgui::Label::Ptr user_identifier_label = nullptr;
+  tgui::EditBox::Ptr user_identifier_input = nullptr;
 
   tgui::Button::Ptr ok_button_ = nullptr;
   tgui::Button::Ptr cancel_button_ = nullptr;
