@@ -27,6 +27,7 @@
 #include <TDMon/application_state.h>
 #include <TDMon/constants.h>
 #include <TDMon/td_mon_cache.h>
+#include <TDMon/td_mon_factory.h>
 
 #include <SFML/Graphics.hpp>
 #include <TGUI/Backends/SFML.hpp>
@@ -39,18 +40,18 @@ namespace tdmon {
 /**
  * @brief The core of the application. Handles the window, gui and application
  * states.
- *
- * SetupMenuType must be constructable from a reference to TdMonFactoryType.
- * MainMenuType must inherit from ApplicationState
- * SetupMenuType must inherit from ApplicationState
- * ObserveMenuType must inherit from ApplicationState
- *
- */
+ * @tparam TdMonFactoryType The td-mon factory to use. Must inherit from TdMonFactory.
+ * @tparam TdMonCacheType The td-mon cache type to use. Must inherit from TdMonCache.
+ * @tparam MainMenuType The main menu type to use. Must inherit from ApplicationState.
+ * @tparam SetupMenuType The setup menu type to use. Must inherit from ApplicationState.
+ * @tparam ObserveMenuType The observe menu type to use. Must inherit from ApplicationState.
+*/
 template <class TdMonFactoryType, class TdMonCacheType, class MainMenuType,
           class SetupMenuType, class ObserveMenuType>
   requires std::constructible_from<SetupMenuType, TdMonFactoryType&> &&
            std::constructible_from<ObserveMenuType, TdMonCacheType&,
                                    TdMonFactoryType&> &&
+           std::derived_from<TdMonFactoryType, TdMonFactory> &&
            std::derived_from<TdMonCacheType, TdMonCache> &&
            std::derived_from<MainMenuType, ApplicationState> &&
            std::derived_from<SetupMenuType, ApplicationState> &&
