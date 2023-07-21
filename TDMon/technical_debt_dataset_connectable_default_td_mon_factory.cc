@@ -1,3 +1,27 @@
+/*********************************
+ *
+ * TD-Mon - Copyright 2023 (c) Kay Leon Gonschior
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the “Software”), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”,
+ * WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+ * TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+ * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *********************************/
+
 #define SQLITECPP_COMPILE_DLL  // this is a workaround for
                                // https://github.com/SRombauts/SQLiteCpp/issues/432
 #include <SQLiteCpp/SQLiteCpp.h>
@@ -20,7 +44,8 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
   {
     SQLite::Statement attack_query(
         db,
-        "SELECT COUNT(key) FROM JIRA_ISSUES WHERE (type='Test' OR type='Documentation') "
+        "SELECT COUNT(key) FROM JIRA_ISSUES WHERE (type='Test' OR "
+        "type='Documentation') "
         "AND assignee=? AND resolution_date IS NOT ''"
         " ORDER BY reporter DESC");
     // bind the chosen user_identifier to the db query
@@ -66,14 +91,18 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
     }
   }
 
-  return std::make_unique<DefaultTdMon>(attack_value, defense_value, speed_value);
+  // create and return a DefaultTdMon with the calculated attack, defense and
+  // speed values
+  return std::make_unique<DefaultTdMon>(attack_value, defense_value,
+                                        speed_value);
 }
 
 void TechnicalDebtDatasetConnectableDefaultTdMonFactory::
     connectToDataSources() {
   // this step succeeds, if a connection to the database on disk can be
-  // established (just to make sure connection to database is possible, this
-  // step is more relvant when connecting to an external API like Jira, etc...)
+  // established (just to make sure connection to database is possible, the
+  // connectToDataSources() method is more relvant when connecting to an
+  // external API like Jira, etc...)
   SQLite::Database db(path_to_db_.string(), SQLite::OPEN_READONLY);
 
   // this statement is not reached, if the above statement throws an
