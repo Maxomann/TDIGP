@@ -36,9 +36,9 @@ namespace tdmon {
 /**
  * @brief This setup menu can set up any td mon factory, as long as it
  * implements the required interfaces
+ *
  * @tparam TdMonFactoryToSetup Must inherit from
  * TechnicalDebtDatasetAccessInformationContainer and ConnectableToDataSources
- *
  */
 template <class TdMonFactoryToSetup>
   requires std::derived_from<TdMonFactoryToSetup,
@@ -86,7 +86,8 @@ class TechnicalDebtDatasetSetupMenu : public ApplicationState {
       factory_to_setup_.setDatabasePath(input_path);
 
       // set the user identifier to use when querying the sql database
-      factory_to_setup_.setUserIdentifier(user_identifier_input->getText().toAnsiString());
+      factory_to_setup_.setUserIdentifier(
+          user_identifier_input->getText().toAnsiString());
 
       // check if all needed information is available
       if (factory_to_setup_.isRequiredDataAccessInformationAvailable()) {
