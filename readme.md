@@ -5,7 +5,7 @@
 - [Setting up the project (Getting started)]
 - [Updating the dependencies]
 - [Generating Documentation & Running Tests]
-- [Allowing other data sources (extending the project)]
+- [Allowing other data sources (Extending the project)]
 
 ## Introduction
 
@@ -55,7 +55,7 @@ For generating beautiful documentation, I recommend running [Doxygen](https://ww
 
 🔴❗TODO: Running tests❗🔴
 
-## Allowing other data sources (extending the project)
+## Allowing other data sources (Extending the project)
 
 By default, td-mon supports connecting to a technical debt dataset database in sqlite format.
 To enable other data sources (for example Jira), please follow the steps below:
