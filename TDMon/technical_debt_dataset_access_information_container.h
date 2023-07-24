@@ -27,12 +27,33 @@
 #include <filesystem>
 
 namespace tdmon {
+/**
+ * @brief Interface class for any implementation which stores access information
+ * to the technical debt dataset.
+ *
+ * Information needed to access the technical debt dataset is: the path to the
+ * sqlite database on disk; the user-identifier to parse the data for (the
+ * dataset contains data for many different maintainers, but td-mon is intended
+ * to parse the data for one person.
+ */
 class TechnicalDebtDatasetAccessInformationContainer {
  public:
+  /**
+   * @brief Virtual default destructor to allow deletion of derived classes
+   * from a pointer to this base class
+   */
   virtual ~TechnicalDebtDatasetAccessInformationContainer() = default;
 
+  /**
+   * @brief Set the user-identifier to parse the dataset for
+   * @param identifier The user-identifier
+  */
   virtual void setUserIdentifier(std::string identifier) = 0;
 
+  /**
+   * @brief Set the path to the technical debt dataset on disk.
+   * @param path The path. Any valid std::filesystem::path is allowed.
+  */
   virtual void setDatabasePath(std::filesystem::path path) = 0;
 };
 }  // namespace tdmon

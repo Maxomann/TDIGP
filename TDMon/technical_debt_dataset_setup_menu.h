@@ -34,8 +34,8 @@
 
 namespace tdmon {
 /**
- * @brief This setup menu can set up any td mon factory, as long as it
- * implements the required interfaces
+ * @brief This setup menu can set up any type of td-mon factory that implements
+ * the required interfaces.
  *
  * @tparam TdMonFactoryToSetup Must inherit from
  * TechnicalDebtDatasetAccessInformationContainer and ConnectableToDataSources
@@ -46,10 +46,21 @@ template <class TdMonFactoryToSetup>
            std::derived_from<TdMonFactoryToSetup, ConnectableToDataSources>
 class TechnicalDebtDatasetSetupMenu : public ApplicationState {
  public:
+
+  /**
+   * @brief Constructor
+   * @param factory_to_setup A reference to the factory to set-up in this menu.
+  */
   TechnicalDebtDatasetSetupMenu(TdMonFactoryToSetup& factory_to_setup)
       : factory_to_setup_(factory_to_setup) {}
 
   // Inherited via ApplicationState
+
+  /**
+   * @brief Implementation of the init function from ApplicationState.
+   * Initializes the gui and gui callbacks.
+   * @param gui The gui.
+   */
   void init(tgui::GuiSFML& gui) override {
     setup_group_ = tgui::Group::create();
 
@@ -126,33 +137,78 @@ class TechnicalDebtDatasetSetupMenu : public ApplicationState {
     gui.add(setup_group_);
   };
 
+  /**
+   * @brief Implementation of the update function from ApplicationState
+   * @return The application state to change to
+   */
   SupportedApplicationStateChanges update() override {
     return next_application_state_change_;
   };
 
+  /**
+   * @brief Implementation of the cleanup function from ApplicationState.
+   * Removes the gui elements that were added in init()
+   * @param gui The gui
+   */
   void cleanup(tgui::GuiSFML& gui) override { gui.remove(setup_group_); };
 
+  /**
+   * @brief Get this classes application state type
+   * @return The application state type
+   */
   SupportedApplicationStateTypes getApplicationStateType() const override {
     return SupportedApplicationStateTypes::kSetupMenu;
   };
 
  private:
+  /**
+   * @brief Store the next application state change to be requested in update().
+   * kNull by default (stay in this state). Ui callbacks may change this value
+   * dependin on which button is pressed.
+   */
   SupportedApplicationStateChanges next_application_state_change_ =
       SupportedApplicationStateChanges::kNull;
 
+  /**
+   * @brief The setup group gui element
+  */
   tgui::Group::Ptr setup_group_ = nullptr;
 
+  /**
+   * @brief The setup form layout gui element
+  */
   tgui::VerticalLayout::Ptr setup_form_layout_ = nullptr;
 
+  /**
+   * @brief The path to database label gui element
+  */
   tgui::Label::Ptr path_to_database_label_ = nullptr;
+  /**
+   * @brief The path to database input gui element
+  */
   tgui::EditBox::Ptr path_to_database_input_ = nullptr;
 
+  /**
+   * @brief The user identigier label gui element
+  */
   tgui::Label::Ptr user_identifier_label = nullptr;
+  /**
+   * @brief The user identifier input gui element
+  */
   tgui::EditBox::Ptr user_identifier_input = nullptr;
 
+  /**
+   * @brief The ok button gui element
+  */
   tgui::Button::Ptr ok_button_ = nullptr;
+  /**
+   * @brief The cancel button gui element
+  */
   tgui::Button::Ptr cancel_button_ = nullptr;
 
+  /**
+   * @brief A reference to the td-mon factory to set up
+  */
   TdMonFactoryToSetup& factory_to_setup_ = nullptr;
 };
 }  // namespace tdmon

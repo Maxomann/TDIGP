@@ -28,28 +28,60 @@
 
 namespace tdmon {
 /**
- * @brief The technical debt monster
+ * @brief The technical debt monster interface
  */
 class TdMon {
  public:
+  /**
+   * @brief Json key to use for storing the type of the derived classes when
+   * serializing to json. Storin that information is needed to allow for
+   * deserialization of the correct derived class.
+   */
   static const std::string kJsonTypeIdentifierKey;
 
+  /**
+   * @brief Virtual default destructor to allow deletion of derived classes
+   * from a pointer to this base class
+   */
   virtual ~TdMon() = default;
 
+  /**
+   * @brief Get the current level of the td-mon
+   * @return The level
+  */
   virtual unsigned int getLevel() const = 0;
 
+  /**
+   * @brief Get the attack value of this td-mon
+   * @return The attack value
+  */
   virtual unsigned int getAttackValue() const = 0;
+  
+  /**
+   * @brief Get the defense value of this td-mon
+   * @return The defense value
+  */
   virtual unsigned int getDefenseValue() const = 0;
+  
+  /**
+   * @brief Get the speed value of this td-mon
+   * @return The speed value
+  */
   virtual unsigned int getSpeedValue() const = 0;
 
+  /**
+   * @brief Serialize this td-mon to json
+   * @return The td-mon in json format
+  */
   virtual nlohmann::json toJson() const = 0;
 
   /**
-   * @brief Get the path to the texture representing the current visual of the TD-Mon.
-   * 
+   * @brief Get the path to the texture representing the current visual of the
+   * TD-Mon.
+   *
    * This path can change, for example depending on the level of the TD-Mon.
    * @return Path to the texture, relative to the application
-  */
-  virtual const std::string& getTexturePath()const = 0;
+   */
+  virtual const std::string& getTexturePath() const = 0;
 };
 }  // namespace tdmon

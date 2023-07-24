@@ -29,10 +29,21 @@
 #include <memory>
 
 namespace tdmon {
+/**
+ * @brief Interface for td-mon factory implementations
+*/
 class TdMonFactory {
  public:
+  /**
+   * @brief Virtual default destructor to allow deletion of derived classes
+   * from a pointer to this base class
+   */
   virtual ~TdMonFactory() = default;
 
+  /**
+   * @brief Create the td-mon
+   * @return A unique_ptr containing the created td-mon
+  */
   virtual std::unique_ptr<TdMon> create() = 0;
 };
 }  // namespace tdmon

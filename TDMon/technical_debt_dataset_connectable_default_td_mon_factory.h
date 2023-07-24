@@ -32,27 +32,78 @@
 #include <string>
 
 namespace tdmon {
+/**
+ * @brief The implementation for a td-mon factory which can be connected to the
+ * technical debt dataset
+ */
 class TechnicalDebtDatasetConnectableDefaultTdMonFactory
     : public TdMonFactory,
       public ConnectableToDataSources,
       public TechnicalDebtDatasetAccessInformationContainer {
  public:
   // Inherited via TdMonFactory
+
+  /**
+   * @brief Create the td-mon
+   * @return The td-mon
+   */
   std::unique_ptr<TdMon> create() override;
 
   // Inherited via ConnectableToDataSources
+
+  /**
+   * @brief Opens the sqlite database from disk. Then closes it again. This
+   * function closes the database again, because a sqlite databse does not need
+   * to be kept open when not reading from it.
+   */
   void connectToDataSources() override;
+
+  /**
+   * @brief Get whether the path to the sqlite database, as well as, the
+   * required user-identifier for parsing the databse are available
+   * @return true, if the required information is available
+   */
   bool isRequiredDataAccessInformationAvailable() override;
+
+  /**
+   * @brief Returns true, if opening the database succeeded in
+   * connectToDataSources(). Due to the way, that sqlite databases work, this
+   * class is assumed to be connected to the database, if the database was
+   * opened once before. This does not mean that the database is currently open.
+   * @return true, if connectToDataSources() was completed successfully before.
+   */
   bool isConnectedToDataSources() override;
 
   // Inherited via TechnicalDebtDatasetAccessInformationContainer
+
+  /**
+   * @brief Set the user identifier whose issues to use when parsing the
+   * technical debt dataset.
+   * @param identifier The user-identifier string
+   */
   void setUserIdentifier(std::string identifier) override;
+
+  /**
+   * @brief Set the path to the technical debt dataset sqlite database on disk
+   * @param path The path to the sqlite databse.
+   */
   void setDatabasePath(std::filesystem::path path) override;
 
-  private:
+ private:
+  /**
+   * @brief The path to the sqlite database on disk
+   */
   std::filesystem::path path_to_db_;
-   std::string user_identifier_;
 
+  /**
+   * @brief The user-identifier string whose issues to use when parsing the
+   * technical debt dataset.
+   */
+  std::string user_identifier_;
+
+  /**
+   * @brief True, if openening the database succeeded in connectToDataSources
+   */
   bool connected_ = false;
 };
 }  // namespace tdmon

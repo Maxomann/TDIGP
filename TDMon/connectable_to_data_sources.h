@@ -33,7 +33,7 @@ class ConnectableToDataSources {
  public:
   /**
    * @brief Virtual default destructor to allow deletion of derived classes
-   * from a pointer to this class
+   * from a pointer to this base class
    */
   virtual ~ConnectableToDataSources() = default;
 

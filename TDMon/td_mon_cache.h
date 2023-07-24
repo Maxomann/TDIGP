@@ -30,15 +30,52 @@
 #include <memory>
 
 namespace tdmon {
+/**
+ * @brief Interface for storage container classes which allow storing of a
+ * td-mon, as well as, serialization/deserialization to a file on disk. Also
+ * stores the timestamp when it was last modified.
+ */
 class TdMonCache {
  public:
+  /**
+   * @brief Store this cache to disk
+   *
+   * Stores the currently cached td-mon, as well as a timestamp indicating when
+   * the cache was last changed. Cache must contain a td-mon (not be empty) when
+   * calling this method.
+   */
   virtual void storeOnDisk() const = 0;
+
+  /**
+   * @brief Load the cache from disk.
+   *
+   * Overrides the current cache with the cache from disk.
+   */
   virtual void loadFromDisk() = 0;
+
+  /**
+   * @brief Check whether a cache file exists on disk.
+   * @return true, if a file exists. false otherwise.
+   */
   virtual bool existsOnDisk() const = 0;
 
+  /**
+   * @brief Update the cache with new td-mon data. Overrides the current cache.
+   * Also updates the "last-modified" timestamp to the current system time.
+   * @param data
+   */
   virtual void updateCache(std::unique_ptr<TdMon> data) = 0;
 
+  /**
+   * @brief Check whether a cache is loaded currently.
+   * @return true, if a loaded cache exists. false otherwise.
+   */
   virtual bool hasCache() const = 0;
+
+  /**
+   * @brief Get the current cache.
+   * @return ptr to the td mon stored in the cache. nullptr, if cache is empty.
+   */
   virtual TdMon* getCache() const = 0;
 
   /**
