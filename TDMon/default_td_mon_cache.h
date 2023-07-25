@@ -50,7 +50,7 @@ class DefaultTdMonCache : public TdMonCache {
   // Inherited via TdMonCache
 
   /**
-   * @brief Stores the current cache to disk
+   * @brief Stores the current cache to disk. Throws, if the internal cache is currently empty.
    */
   void storeOnDisk() const override;
 

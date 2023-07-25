@@ -54,7 +54,7 @@ TEST(DefaultTdMon, CalculatesLevelCorrectly) {
 
 /**
  * @brief Test, if serialization to json works correctly
-*/
+ */
 TEST(DefaultTdMon, SerializesToJsonCorrectly) {
   {
     DefaultTdMon td_mon(100, 200, 300);
@@ -90,7 +90,8 @@ TEST(DefaultTdMon, CreatesFromJsonCorrectly) {
 }
 
 /**
- * @brief Test, if the correct texture path is returned for different levels (low, medium, high)
+ * @brief Test, if the correct texture path is returned for different levels
+ * (low, medium, high)
  */
 TEST(DefaultTdMon, ReturnsCorrectTexturePathForLevels) {
   // create tdmon of level kLevelCap - 1
