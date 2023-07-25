@@ -32,7 +32,7 @@ add_executable(
 )
 
 target_link_libraries(
-  TDMonTests
+  TDMonTests PRIVATE
   GTest::gtest_main
 )
 
