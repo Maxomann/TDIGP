@@ -6,7 +6,8 @@
     "sfml",
     "tgui",
     "nlohmann-json",
-    "sqlitecpp"
+    "sqlitecpp",
+    "gtest"
   ],
   "builtin-baseline": "50a4aa2be9c05e16d34c98369a8e1dd01796c3f0"
 }

@@ -30,7 +30,7 @@ To set up the project please follow the steps below:
 1. Make sure the following are installed on your system:
 	- Microsoft Visual Studio Community 2022 (64-bit) - Preview
 Version 17.7.0 Preview 4.0 or newer. [Download](https://visualstudio.microsoft.com/de/vs/) (Please make sure to select the "Desktop development with C++" workload in the installer.)
-	- Vcpkg. [Install instructions](https://vcpkg.io/en/getting-started.html) (You do not need to run any install commands for packages in the console. This is handled by the build scrips. But, please make sure to run `vcpkg integrate install` at least once before opening the td-mon project.)
+	- Vcpkg. [Install instructions](https://vcpkg.io/en/getting-started.html) (You do not need to run any install commands for packages in the console. This is handled by the build scrips. But, please make sure to run `vcpkg integrate install` at least once before opening the Td-Mon project.)
 
 2. Clone the Td-Mon [git repository](https://github.com/Maxomann/TDMon) to your pc.
 
@@ -53,7 +53,12 @@ To update individual dependencies please see the vcpkg [documentation](https://l
 
 For generating beautiful documentation, I recommend running [Doxygen](https://www.doxygen.nl/index.html) in the project folder.
 
-🔴❗TODO: Running tests❗🔴
+Unit tests are available for all units, except for UI classes (ApplicationStates). The project includes GTest as testing framework. Mock objects are created using gMock.
+To run unit test please follow the steps below:
+1. Make sure the `Test Adapter for Google Test` is installed as part of your Visual Studio workload. If not, please add it to your installation, using the Visual Studio Installer.
+2. Open the project in Visual Studio
+3. Open the test explorer under `View > Test Explorer`
+4. Run the tests. (If, for whatever reason, the Test Explorer does not discover any tests, please build and run the TDMonTests target manually. This runs all tests in the console window.)
 
 ## Allowing other data sources (Extending the project)
 

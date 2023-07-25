@@ -19,3 +19,21 @@ add_custom_command(
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
 	"${CMAKE_SOURCE_DIR}/data/" "$<TARGET_FILE_DIR:TDMon>/data"
 )
+
+
+# ---------------- UNIT TESTS ----------------
+
+enable_testing()
+include(GoogleTest)
+
+add_executable(
+  TDMonTests
+  "default_td_mon.test.cc"
+)
+
+target_link_libraries(
+  TDMonTests
+  GTest::gtest_main
+)
+
+gtest_discover_tests(TDMonTests)

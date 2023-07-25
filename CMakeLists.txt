@@ -6,6 +6,7 @@ find_package(SFML 2 COMPONENTS system window graphics network CONFIG REQUIRED)
 find_package(TGUI CONFIG REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(SQLiteCpp CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
 
 include_directories(./)
 
