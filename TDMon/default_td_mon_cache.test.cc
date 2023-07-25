@@ -7,7 +7,7 @@
 
 namespace tdmon {
 // GENERAL INFO:
-// Usually I would create a mock TdMon to test a container object like the
+// Usually I would create a TdMonMock class to test a container object like the
 // DefaultTdMonCache. In this case, the DefaultTdMonCache only works with the
 // DefaultTdMon (because of serialization/deserialization), therefore I use
 // DefaultTdMon directly. If any tests for DefaultTdMonCache fail, please make
@@ -176,9 +176,10 @@ TEST(DefaultTdMonCache, DetectsWhetherInternalCacheExistsCorrectly) {
  * to get the same timestamp that was generated inside the updateCache() later
  * on. At least, I don't know a way to do this using google test.
  */
-TEST(DefaultTdMonCache, ChangesTimestampOnUpdate) { DefaultTdMonCache cache;
+TEST(DefaultTdMonCache, ChangesTimestampOnUpdate) {
+  DefaultTdMonCache cache;
 
-EXPECT_EQ(cache.getLastUpdatedTimestamp(), std::chrono::microseconds(0));
+  EXPECT_EQ(cache.getLastUpdatedTimestamp(), std::chrono::microseconds(0));
 
   cache.updateCache(std::make_unique<DefaultTdMon>(100, 200, 300));
 
