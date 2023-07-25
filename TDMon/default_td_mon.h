@@ -70,12 +70,12 @@ class DefaultTdMon : public TdMon {
   static const std::string kPathToTex2;
 
   /**
-   * @brief If a TD-Mons level is bigger than kLevelCap1, it will return it's
+   * @brief If a TD-Mons level is bigger than or equal to kLevelCap1, it will return it's
    * "medium" form texture in getTexturePath()
    */
   static const unsigned int kLevelCap1 = 10;
   /**
-   * @brief If a TD-Mons level is bigger than kLevelCap2, it will return it's
+   * @brief If a TD-Mons level is bigger than or equal to kLevelCap2, it will return it's
    * "strong" form texture in getTexturePath()
    */
   static const unsigned int kLevelCap2 = 20;
@@ -92,7 +92,8 @@ class DefaultTdMon : public TdMon {
   // Inherited via TdMon
 
   /**
-   * @brief Get the level. This is calculated as the average of attack, defense and speed.
+   * @brief Get the level. This is calculated as the average of attack, defense
+   * and speed using integer devision (rounded towards zero).
    * @return The level
    */
   unsigned int getLevel() const override;
@@ -129,7 +130,7 @@ class DefaultTdMon : public TdMon {
 
   /**
    * @brief Get the current texture path. This may change depending on the level
-   * of the td-mon.
+   * of the td-mon. See static class variables kLevelCap1 and kLevelCap2.
    * @return The relative texture path.
    */
   const std::string& getTexturePath() const override;
