@@ -31,6 +31,7 @@ To set up the project please follow the steps below:
 	- Microsoft Visual Studio Community 2022 (64-bit) - Preview
 Version 17.7.0 Preview 4.0 or newer. [Download](https://visualstudio.microsoft.com/de/vs/) (Please make sure to select the "Desktop development with C++" workload in the installer.)
 	- Vcpkg. [Install instructions](https://vcpkg.io/en/getting-started.html) (You do not need to run any install commands for packages in the console. This is handled by the build scrips. But, please make sure to run `vcpkg integrate install` at least once before opening the Td-Mon project.)
+	- [Git](https://git-scm.com/) & [Git LFS](https://git-lfs.com/)
 
 2. Clone the Td-Mon [git repository](https://github.com/Maxomann/TDMon) to your pc.
 
