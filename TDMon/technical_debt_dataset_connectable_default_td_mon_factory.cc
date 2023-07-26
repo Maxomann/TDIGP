@@ -79,7 +79,7 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
     SQLite::Statement speed_query(
         db,
         "SELECT SUM(watch_count) FROM JIRA_ISSUES WHERE (type='Test' OR "
-        "type='Documentation') AND assignee=? ORDER BY "
+        "type='Documentation') AND reporter=? ORDER BY "
         "reporter DESC");
     // bind the chosen user_identifier to the db query
     speed_query.bind(1, user_identifier_);

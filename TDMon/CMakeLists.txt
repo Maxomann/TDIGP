@@ -1,5 +1,5 @@
 set(TDMonHeaderAndSourceFilesNoMain "core.h"  "td_mon.h" "td_mon.cc" "connectable_to_data_sources.h" "technical_debt_dataset_access_information_container.h" "td_mon_factory.h" "default_td_mon.h" "default_td_mon.cc"  "application_state.h" "main_menu.h" "main_menu.cc" "technical_debt_dataset_setup_menu.h" "constants.h" "constants.cc" "observe_menu.h" "observe_menu.cc" "technical_debt_dataset_connectable_default_td_mon_factory.h" "technical_debt_dataset_connectable_default_td_mon_factory.cc" "td_mon_cache.h" "default_td_mon_cache.h" "default_td_mon_cache.cc")
-set(TDMonTestSourceFiles "default_td_mon.test.cc" "default_td_mon_cache.test.cc")
+set(TDMonTestSourceFiles "default_td_mon.test.cc" "default_td_mon_cache.test.cc" "technical_debt_dataset_connectable_default_td_mon_factory.test.cc")
 
 add_executable(TDMon ${TDMonHeaderAndSourceFilesNoMain} "main.cc")
 
