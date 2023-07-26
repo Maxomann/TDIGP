@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "tdmon",
+  "version": "0.1.0",
+  "dependencies": [
+    "sfml",
+    "tgui",
+    "nlohmann-json",
+    "sqlitecpp",
+    "gtest"
+  ],
+  "builtin-baseline": "50a4aa2be9c05e16d34c98369a8e1dd01796c3f0"
+}
