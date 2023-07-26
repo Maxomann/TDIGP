@@ -26,6 +26,7 @@
 #include <TDMon/observe_menu.h>
 
 #include <format>
+#include <iostream>
 
 namespace tdmon {
 ObserveMenu::ObserveMenu(TdMonCache& tdmon_cache, TdMonFactory& tdmon_factory)
