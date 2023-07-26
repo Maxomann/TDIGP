@@ -46,8 +46,7 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
         db,
         "SELECT COUNT(key) FROM JIRA_ISSUES WHERE (type='Test' OR "
         "type='Documentation') "
-        "AND assignee=? AND resolution_date IS NOT ''"
-        " ORDER BY reporter DESC");
+        "AND assignee=? AND resolution_date IS NOT ''");
     // bind the chosen user_identifier to the db query
     attack_query.bind(1, user_identifier_);
 
@@ -79,8 +78,7 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
     SQLite::Statement speed_query(
         db,
         "SELECT SUM(watch_count) FROM JIRA_ISSUES WHERE (type='Test' OR "
-        "type='Documentation') AND reporter=? ORDER BY "
-        "reporter DESC");
+        "type='Documentation') AND reporter=?");
     // bind the chosen user_identifier to the db query
     speed_query.bind(1, user_identifier_);
 
