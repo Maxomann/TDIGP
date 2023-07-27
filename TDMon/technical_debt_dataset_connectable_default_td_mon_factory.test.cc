@@ -19,7 +19,7 @@ const std::string kTestDbPath = "./test.db";
  * @brief Helper function. Create the database containing test data on disk, if
  * it does not exist. Ensures that the database contains the correct test data.
  */
-void ensureTestTbExistsAndContainsCorrectData() {
+void ensureTestDbExistsAndContainsCorrectData() {
   const std::string test_data_sql =
       "BEGIN TRANSACTION;DROP TABLE IF EXISTS \"JIRA_ISSUES\";CREATE TABLE IF "
       "NOT EXISTS \"JIRA_ISSUES\" (\"KEY\"	INTEGER NOT "
@@ -50,10 +50,10 @@ void ensureTestDbDoesNotExists() { std::filesystem::remove(kTestDbPath); }
 /**
  * @brief Test, if sqlite data is parsed correctly. Test data is selected to
  * contain variation and to cover edge cases. See
- * ensureTestTbExistsAndContainsCorrectData for test data string.
+ * ensureTestDbExistsAndContainsCorrectData for test data string.
  */
 TEST(TechnicalDebtDatasetConnectableDefaultTdMonFactory, ParsesDataCorrectly) {
-  ensureTestTbExistsAndContainsCorrectData();
+  ensureTestDbExistsAndContainsCorrectData();
 
   TechnicalDebtDatasetConnectableDefaultTdMonFactory factory;
   factory.setDatabasePath(kTestDbPath);
@@ -94,7 +94,7 @@ TEST(TechnicalDebtDatasetConnectableDefaultTdMonFactory,
   EXPECT_FALSE(factory.isConnectedToDataSources());
 
   // create the database
-  ensureTestTbExistsAndContainsCorrectData();
+  ensureTestDbExistsAndContainsCorrectData();
 
   factory.connectToDataSources();
 
