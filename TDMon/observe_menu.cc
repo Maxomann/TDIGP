@@ -49,7 +49,14 @@ void ObserveMenu::init(tgui::GuiSFML& gui) {
   refresh_button_->setPosition("parent.width - width", 0);
   refresh_button_->setSize(100, 50);
   refresh_button_->setTextSize(UiConstants::kButtonFontSize);
-  refresh_button_->onPress.connect([&]() { refreshTdMon(); });
+  refresh_button_->onPress.connect([&]() {
+    // update the td-mon and relevant UI
+    try {
+      refreshTdMon(false);
+    } catch (std::exception e) {
+      std::cout << "cannot update TdMon. Reason: " << e.what() << std::endl;
+    }
+  });
   observe_menu_group_->add(refresh_button_);
 
   tdmon_picture_ = tgui::Picture::create();
@@ -64,8 +71,15 @@ void ObserveMenu::init(tgui::GuiSFML& gui) {
 
   gui.add(observe_menu_group_);
 
-  // refresh the td-mon and relevant UI
-  refreshTdMon(true);
+  // initialize the td-mon and relevant UI
+  try {
+    refreshTdMon(true);
+  } catch (std::exception e) {
+    std::cout
+        << "cannot initialize TdMon. Reason: " << e.what()
+        << "\nPlease make sure that you entered correct information in the setup."
+        << std::endl;
+  }
 }
 
 SupportedApplicationStateChanges ObserveMenu::update() {
