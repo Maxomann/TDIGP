@@ -16,7 +16,7 @@ in the backlog.
 
 The monster's appearance changes depending on its level.
 
-The monsters values are based on:
+The monster's values are based on:
 - Attack: The amount of technical debt items closed by a developer
 - Defense: The amount of technical debt items opened by a developer
 - Speed: The cumulated amount of watchers on all issues opened by a developer
