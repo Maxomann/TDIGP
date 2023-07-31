@@ -96,7 +96,7 @@ TEST(DefaultTdMonCache, LoadsFromDiskCorrectly) {
  * @brief Test, if the cache detects the existance (or absence) of a cache file
  * on disk correctly.
  */
-TEST(DefaultTdMonCache, DetectsExistnaceOfCacheOnDiskCorrectly) {
+TEST(DefaultTdMonCache, DetectsExistanceOfCacheOnDiskCorrectly) {
   // delete possibly existing cache file
   std::filesystem::remove(DefaultTdMonCache::kCacheFilePath);
 
