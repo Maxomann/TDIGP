@@ -60,8 +60,9 @@ Unit tests are available for all units, except for UI classes (ApplicationStates
 To run unit tests, please follow the steps below:
 1. Make sure the `Test Adapter for Google Test` is installed as part of your Visual Studio workload. If not, please add it to your installation, using the Visual Studio Installer.
 2. Open the project in Visual Studio
-3. Open the test explorer under `View > Test Explorer`
-4. Run the tests. (If, for whatever reason, the Test Explorer does not discover any tests, please build and run the TDMonTests target manually. This runs all tests in the console window.)
+3. Build the `TDMonTests.exe` target or build all `Build > Build All`
+4. Open the test explorer under `View > Test Explorer`
+5. Run the tests. (If, for whatever reason, the Test Explorer does not discover any tests, please run the TDMonTests target manually. This runs all tests in the console window.)
 
 ## Allowing other data sources (Extending the project)
 
