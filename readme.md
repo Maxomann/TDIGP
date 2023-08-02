@@ -35,7 +35,7 @@ Version 17.7.0 Preview 4.0 or newer. [Download](https://visualstudio.microsoft.c
 
 2. Clone the Td-Mon [git repository](https://github.com/Maxomann/TDMon) to your pc.
 
-3. Open the project using the "open folder" command in Visual Studio. (When opening the folder for the first time, VisualStudio generates the CMake cache and installs dependencies. This may take a while.)
+3. Open the project using the "open folder" command in Visual Studio. (When opening the folder for the first time, VisualStudio generates the CMake cache and installs dependencies. This may take a while.) Please make sure to select the topmost folder containing a `CMakeLists.txt`. Subfolders may also contain `CMakeLists.txt` files, but opening those causes issues.
 
 4. Compile and run.
 	- In the shortcut bar at the top, it says: "Select Startup Item...". Please select `TdMon.exe` as the startup item.
