@@ -4,6 +4,8 @@
 
 #include <filesystem>
 #include <fstream>
+#include <thread>
+#include <chrono>
 
 namespace tdmon {
 // GENERAL INFO:
@@ -186,6 +188,9 @@ TEST(DefaultTdMonCache, ChangesTimestampOnUpdate) {
   std::chrono::microseconds timestamp0 = cache.getLastUpdatedTimestamp();
 
   EXPECT_NE(timestamp0, std::chrono::microseconds(0));
+
+  // sleep for 10 milliseconds to make sure the timestamp changes
+  std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
   // update with same data, doesent't matter
   cache.updateCache(std::make_unique<DefaultTdMon>(100, 200, 300));
