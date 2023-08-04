@@ -121,6 +121,9 @@ TEST(DefaultTdMonCache, DetectsExistanceOfCacheOnDiskCorrectly) {
   }
 
   EXPECT_TRUE(cache.existsOnDisk());
+
+  // clean up to not leave invalid cache file on disk
+  std::filesystem::remove(DefaultTdMonCache::kCacheFilePath);
 }
 
 /**

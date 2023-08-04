@@ -82,6 +82,7 @@ TdMon* DefaultTdMonCache::getCache() const { return cache_.get(); }
 std::chrono::microseconds DefaultTdMonCache::getLastUpdatedTimestamp() const {
   return last_updated_timestamp_;
 }
+
 bool DefaultTdMonCache::hasCache() const { return cache_ != nullptr; }
 
 bool DefaultTdMonCache::existsOnDisk() const {
