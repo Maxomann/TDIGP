@@ -35,18 +35,21 @@
  * @return The program exit code. Always 0 in this application.
  */
 int main() {
-  // using 'typename' is important here for type deduction
-  tdmon::Core<
-      typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory,
-      typename tdmon::DefaultTdMonCache,
-      typename tdmon::MainMenu,
-      typename tdmon::TechnicalDebtDatasetSetupMenu<
-          typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory>,
-      typename tdmon::ObserveMenu>
-      core;
+  try {
+    // using 'typename' is important here for type deduction
+    tdmon::Core<
+        typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory,
+        typename tdmon::DefaultTdMonCache, typename tdmon::MainMenu,
+        typename tdmon::TechnicalDebtDatasetSetupMenu<
+            typename tdmon::TechnicalDebtDatasetConnectableDefaultTdMonFactory>,
+        typename tdmon::ObserveMenu>
+        core;
 
-  // run the application
-  core.run();
+    // run the application
+    core.run();
+  } catch (std::exception e) {
+    std::cout << "FATAL ERROR: " << e.what() << std::endl;
+  }
 
   return 0;
 }
