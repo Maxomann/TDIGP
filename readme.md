@@ -6,6 +6,7 @@
 - [Updating the dependencies]
 - [Generating Documentation & Running Tests]
 - [Allowing other data sources (Extending the project)]
+- [Changing which issues categories to parse from the "Technical Debt Dataset"]
 
 ## Introduction
 
@@ -76,3 +77,6 @@ To enable other data sources (for example Jira), please follow the steps below:
 2. Implement a custom setup menu. As an example, please look at the currently existing `TechnicalDebtDatasetSetupMenu`. Your setup menu must inherit from `ApplicationState`. The setup menu handles the GUI needed to feed login data (or other information) to your factory. Your setup menu must take one constructor parameter: a reference to the `TdMonFactory` implementation you created in step 1. These constraints are checked at compile time. Compilation fails, if these constraints are not adhered to.
 3. Inject your newly created classes as template parameters in the `Core` in the `main.cc` file. The project is based on dependency injection. You only need to modify the `main.cc` file.
 4. Compile and run.
+
+## Changing which issues categories to parse from the "Technical Debt Dataset"
+The class `TechnicalDebtDatasetConnectableDefaultTdMonFactory` has a member `static const std::string kCategoriesToParse`. This variable is used as part of the SQL query when parsing the dataset. By default the value for this variable is `(type='Test' OR type='Documentation')`. To parse other categories, please change its value. For example, if you want to include "improvement" issues, the new value would be `(type='Test' OR type='Documentation' OR type='Improvement')`.

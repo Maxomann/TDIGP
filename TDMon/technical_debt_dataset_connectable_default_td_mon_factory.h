@@ -41,6 +41,19 @@ class TechnicalDebtDatasetConnectableDefaultTdMonFactory
       public ConnectableToDataSources,
       public TechnicalDebtDatasetAccessInformationContainer {
  public:
+  /**
+   * @brief When querying the dataset, certain categories of issues are filtered
+   * out (for example 'bug', because it is not TD). This is the part of the sql
+   * query that determines which categories of issues to use. Modify, if you
+   * want to parse other categories. Must be valid sql.
+   */
+  static const std::string kCategoriesToParse;
+
+  /**
+   * @brief The table name to gather data from in the sql query.
+   */
+  static const std::string kTableToParse;
+
   // Inherited via TdMonFactory
 
   /**

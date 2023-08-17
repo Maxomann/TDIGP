@@ -43,10 +43,9 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
   // Calculate attack value
   {
     SQLite::Statement attack_query(
-        db,
-        "SELECT COUNT(key) FROM JIRA_ISSUES WHERE (type='Test' OR "
-        "type='Documentation') "
-        "AND assignee=? AND resolution_date IS NOT ''");
+        db, "SELECT COUNT(key) FROM " + kTableToParse + " WHERE " +
+                kCategoriesToParse +
+                " AND assignee=? AND resolution_date IS NOT ''");
     // bind the chosen user_identifier to the db query
     attack_query.bind(1, user_identifier_);
 
@@ -59,10 +58,9 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
 
   // Calculate defense value
   {
-    SQLite::Statement defense_query(db,
-                                    "SELECT COUNT(key) FROM JIRA_ISSUES WHERE "
-                                    "(type='Test' OR type='Documentation') "
-                                    "AND reporter=?");
+    SQLite::Statement defense_query(
+        db, "SELECT COUNT(key) FROM " + kTableToParse + " WHERE " +
+                kCategoriesToParse + "AND reporter=?");
     // bind the chosen user_identifier to the db query
     defense_query.bind(1, user_identifier_);
 
@@ -76,9 +74,8 @@ TechnicalDebtDatasetConnectableDefaultTdMonFactory::create() {
   // Calculate speed value
   {
     SQLite::Statement speed_query(
-        db,
-        "SELECT SUM(watch_count) FROM JIRA_ISSUES WHERE (type='Test' OR "
-        "type='Documentation') AND reporter=?");
+        db, "SELECT SUM(watch_count) FROM " + kTableToParse + " WHERE " +
+                kCategoriesToParse + " AND reporter=?");
     // bind the chosen user_identifier to the db query
     speed_query.bind(1, user_identifier_);
 
@@ -128,5 +125,13 @@ void TechnicalDebtDatasetConnectableDefaultTdMonFactory::setUserIdentifier(
     std::string identifier) {
   user_identifier_ = std::move(identifier);
 }
+
+const std::string
+    TechnicalDebtDatasetConnectableDefaultTdMonFactory::kCategoriesToParse =
+        "(type='Test' OR type='Documentation')";
+
+const std::string
+    TechnicalDebtDatasetConnectableDefaultTdMonFactory::kTableToParse =
+        "JIRA_ISSUES";
 
 }  // namespace tdmon
