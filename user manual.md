@@ -21,4 +21,4 @@ Here, please enter two things:
 Then press "accept".
 
 ## Viewing the TD-Mon
-Press the "View my TD-Mon" button. To refresh the data, please press the "refresh" button in the top-right corner.
+Press the "View my TD-Mon" button. To refresh the data, please press the "refresh" button in the top-right corner. **Please note: by default, the TD-Mon is only updated automatically when you view it for the very first time. In any subsequent access (even after restarting the application!), you need to press the refresh button to update the TD-Mon. This is so that you do not have to enter your setup information every time you want to see your TD-Mon.**
