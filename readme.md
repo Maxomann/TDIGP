@@ -5,7 +5,10 @@
 - [Setting up the project (Getting started)]
 - [Updating the dependencies]
 - [Generating Documentation & Running Tests]
-- [Important Classes]
+- [Important Data Structures & UML Class Diagram]
+	- [Pure Virtual Classes (Interfaces)]
+	- [Implementation Classes]
+	- [Enum Classes]
 - [Allowing other data sources (Extending the project)]
 - [Changing which issues categories to parse from the "Technical Debt Dataset"]
 
@@ -66,29 +69,43 @@ To run unit tests, please follow the steps below:
 4. Open the test explorer under `View > Test Explorer`
 5. Run the tests. (If, for whatever reason, the Test Explorer does not discover any tests, please run the TDMonTests target manually. This runs all tests in the console window.)
 
-## Important Classes
+## Important Data Structures & UML Class Diagram
+
+The following sections list all relevant pure virtual classes (interfaces) and all other classes & enumerations respectively.
+
+Their relationship is shown in this UML Class Diagram:
+![UML Class Diagram of TD-Mon](./tdmon.svg)
+
+### Pure Virtual Classes (Interfaces)
+
+| Class Name    | Description |
+| -------- | ------- |
+| TdMonFactory | Interface for td-mon factory implementations  |
+| ConnectableToDataSources    | Interface for any class that supports connection to one or multiple data source(s) (sql database, Jira, etc...)    |
+| TechnicalDebtDatasetAccessInformationContainer | Interface class for any implementation which stores access information to the technical debt dataset. Information needed to access the technical debt dataset is: the path to thensqlite database on disk; the user-identifier to parse the data for (the dataset contains data for many different maintainers, but td-mon is intended to parse the data for one person.     |
+| TdMonCache | Interface for storage container classes which allow storing of a td-mon, as well as, serialization/deserialization to a file on disk. Also stores the timestamp when it was last modified.    |
+| TdMon | The technical debt monster interface |
+| ApplicationState | Interface for all states of the application. |
+
+### Implementation Classes
 
 | Class Name    | Description |
 | -------- | ------- |
 | Core  | The core of the application. Handles the window, gui and application states.    |
-| TdMonFactory | Interface for td-mon factory implementations  |
-| ConnectableToDataSources    | Interface for any class that supports connection to one or multiple data source(s) (sql database, Jira, etc...)    |
-| TechnicalDebtDatasetAccessInformationContainer | Interface class for any implementation which stores access information to the technical debt dataset. Information needed to access the technical debt dataset is: the path to thensqlite database on disk; the user-identifier to parse the data for (the dataset contains data for many different maintainers, but td-mon is intended to parse the data for one person.     |
 | TechnicalDebtDatasetConnectableDefaultTdMonFactory | The implementation for a td-mon factory which can be connected to the technical debt dataset     |
-| TdMonCache | Interface for storage container classes which allow storing of a td-mon, as well as, serialization/deserialization to a file on disk. Also stores the timestamp when it was last modified.    |
 | DefaultTdMonCache | The default implementation of the TdMonCache. This implementation currently only supports serialization/deserialization of DefaultTdMon objects |
-| TdMon | The technical debt monster interface |
 | DefaultTdMon | Implementation of the default TD-Mon. Has fixed paths to textures and level caps for different version of the textures. |
-| ApplicationState | Interface for all states of the application. |
 | MainMenu | The main menu ApplicationState. Responsible for allowing the user to select which Use-Case to access. |
 | ObserveMenu | The observe menu application state. Responsible for displaying the td-mon from cache and updating it from the td-mon factory passed in the constructor, if requested by the click of a button. |
 | TechnicalDebtDatasetSetupMenu | This setup menu can set up any type of td-mon factory that implements the required interfaces. |
 | UiConstants | Global UI constants for the application. E.g. text strings or font size. |
+
+### Enum Classes
+
+| Class Name    | Description |
+| -------- | ------- |
 | SupportedApplicationStateTypes | The supported application states. This is required to allow dependency injection through templates in the core, while still being able to switch between different 'types' of states. |
 | SupportedApplicationStateChanges | The supported application state changes |
-
-Their Relationship in a UML Class Diagram:
-![UML Class Diagram of TD-Mon](./tdmon.svg)
 
 ## Allowing other data sources (Extending the project)
 
@@ -104,4 +121,4 @@ To enable other data sources (for example Jira), please follow the steps below:
 4. Compile and run.
 
 ## Changing which issues categories to parse from the "Technical Debt Dataset"
-The class `TechnicalDebtDatasetConnectableDefaultTdMonFactory` has a member `static const std::string kCategoriesToParse`. This variable is used as part of the SQL query when parsing the dataset. By default the value for this variable is `(type='Test' OR type='Documentation')`. To parse other categories, please change its value. For example, if you want to include "improvement" issues, the new value would be `(type='Test' OR type='Documentation' OR type='Improvement')`.
+The class `TechnicalDebtDatasetConnectableDefaultTdMonFactory` has a static member `static const std::string kCategoriesToParse`. This variable is inserted into the the SQL query when parsing the dataset. By default the value for this variable is `(type='Test' OR type='Documentation')` to parse issues of category `Test` or `Documentation`. To parse other categories, please change the value of the static member variable. For example, if you also want to include `Improvement` issues, the new value would be `(type='Test' OR type='Documentation' OR type='Improvement')`. Afterwards, please recompile the application.

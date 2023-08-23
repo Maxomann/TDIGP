@@ -3,6 +3,8 @@
 ## Before running the software
 The software requires the "Microsoft Visual C++ Redistributable packages for Visual Studio 2015, 2017, 2019, and 2022" to be installed on the system, before starting `TDMon.exe`. Otherwise ".dll not found" errors may arise. The releases of TDMon are bundled with a file called `vc_redist.x64.exe`. Please run this file to install the redistributables.
 
+To run the software, please open `TDMon.exe`.
+
 ## While running the software
 If any operation fails, errors are displayed in the console window.
 
