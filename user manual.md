@@ -1,6 +1,7 @@
 # User Manual
 
-## Before running the software
+## Before running the software (Installation)
+Download the most recent release from GitHub [here](https://github.com/Maxomann/TDMon/releases). Unpack the downloaded .zip file into a folder, somewhere on your computer.
 The software requires the "Microsoft Visual C++ Redistributable packages for Visual Studio 2015, 2017, 2019, and 2022" to be installed on the system, before starting `TDMon.exe`. Otherwise ".dll not found" errors may arise. The releases of TDMon are bundled with a file called `vc_redist.x64.exe`. Please run this file to install the redistributables.
 
 To run the software, please open `TDMon.exe`.
