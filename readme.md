@@ -80,18 +80,18 @@ Their relationship is shown in this UML Class Diagram:
 
 | Class Name    | Description |
 | -------- | ------- |
-| TdMonFactory | Interface for td-mon factory implementations  |
-| ConnectableToDataSources    | Interface for any class that supports connection to one or multiple data source(s) (sql database, Jira, etc...)    |
-| TechnicalDebtDatasetAccessInformationContainer | Interface class for any implementation which stores access information to the technical debt dataset. Information needed to access the technical debt dataset is: the path to thensqlite database on disk; the user-identifier to parse the data for (the dataset contains data for many different maintainers, but td-mon is intended to parse the data for one person.     |
-| TdMonCache | Interface for storage container classes which allow storing of a td-mon, as well as, serialization/deserialization to a file on disk. Also stores the timestamp when it was last modified.    |
+| TdMonFactory | Interface for TdMon factory implementations. It's purpose is to create instances of classes that inherit from the TdMon interface. The "Factory" pattern is used to create the TdMon, while supporting different data sources. On can implement a factory that creates TdMon instances from a Jira data source and another factory that create TdMon instances from an Azure data source for example. The concrete factory to use can be selected at compile time, as a template parameter in the Core class. |
+| ConnectableToDataSources    | Interface for any class that supports connection to one or multiple data source(s) (sql database, Jira, etc...). Its purpose is to allow checking, if all required login information is available in the implementing class, connecting to data sources and checking the current status of the connection (connected or disconnected). |
+| TechnicalDebtDatasetAccessInformationContainer | Interface class for any implementation which stores access information to the technical debt dataset. Information needed to access the technical debt dataset is: the path to the sqlite database on disk; the user-identifier to parse the data for (the dataset contains data for many different maintainers, but td-mon is intended to parse the data for one person.     |
+| TdMonCache | Interface for storage container classes which allow storing of a td-mon, as well as, serialization/deserialization to a file on disk. Also stores the timestamp when it was last modified. The purpose of the TdMonCache is to allow viewing of a previously generated TdMon without regenerating it from a factory. This removes the need to enter login information (like Jira username and password) every time one starts the application to view their TdMon. |
 | TdMon | The technical debt monster interface |
-| ApplicationState | Interface for all states of the application. |
+| ApplicationState | Interface for all states of the application (main menu, setup menu, etc...). Implementations of this interface each represent a state and are responsible for setting up their UI and UI callbacks. "State" refers to the use of the "State" pattern. |
 
 ### Implementation Classes
 
 | Class Name    | Description |
 | -------- | ------- |
-| Core  | The core of the application. Handles the window, gui and application states.    |
+| Core  | The core of the application. Handles the window, gui and application states. Creates one instance each of: TdMonCacheType and TdMonFactoryType to pass them to the appropriate application states where they are needed. Uses the MainMenuType, SetupMenuType and ObserveMenuType to switch to different application states respectively. @tparam TdMonFactoryType The td-mon factory to use. Must inherit from TdMonFactory. @tparam TdMonCacheType The td-mon cache type to use. Must inherit from TdMonCache. @tparam MainMenuType The main menu type to use. Must inherit from ApplicationState. @tparam SetupMenuType The setup menu type to use. Must inherit from ApplicationState. @tparam ObserveMenuType The observe menu type to use. Must inherit from ApplicationState.  |
 | TechnicalDebtDatasetConnectableDefaultTdMonFactory | The implementation for a td-mon factory which can be connected to the technical debt dataset     |
 | DefaultTdMonCache | The default implementation of the TdMonCache. This implementation currently only supports serialization/deserialization of DefaultTdMon objects |
 | DefaultTdMon | Implementation of the default TD-Mon. Has fixed paths to textures and level caps for different version of the textures. |

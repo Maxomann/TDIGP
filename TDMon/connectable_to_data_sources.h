@@ -27,13 +27,16 @@
 namespace tdmon {
 /**
  * @brief Interface for any class that supports connection to one or multiple
- * data source(s) (sql database, Jira, etc...)
+ * data source(s) (sql database, Jira, etc...). Its purpose is to allow
+ * checking, if all required login information is available in the implementing
+ * class, connecting to data sources and checking the current status of the
+ * connection (connected or disconnected).
  */
 class ConnectableToDataSources {
  public:
   /**
    * @brief Virtual default destructor to allow deletion of derived classes
-   * from a pointer to this base class
+   * from a pointer to this base class.
    */
   virtual ~ConnectableToDataSources() = default;
 
@@ -52,7 +55,7 @@ class ConnectableToDataSources {
 
   /**
    * @brief Get whether the object is currently connected to the data sources.
-   * @return
+   * @return true if currently connected
    */
   virtual bool isConnectedToDataSources() = 0;
 };

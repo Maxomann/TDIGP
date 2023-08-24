@@ -33,7 +33,11 @@ namespace tdmon {
 /**
  * @brief Interface for storage container classes which allow storing of a
  * td-mon, as well as, serialization/deserialization to a file on disk. Also
- * stores the timestamp when it was last modified.
+ * stores the timestamp when it was last modified. The purpose of the TdMonCache
+ * is to allow viewing of a previously generated TdMon without regenerating it
+ * from a factory. This removes the need to enter login information (like Jira
+ * username and password) every time one starts the application to view their
+ * TdMon.
  */
 class TdMonCache {
  public:

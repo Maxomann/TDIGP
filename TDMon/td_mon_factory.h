@@ -30,8 +30,16 @@
 
 namespace tdmon {
 /**
- * @brief Interface for td-mon factory implementations
-*/
+ * @brief Interface for TdMon factory implementations. It's purpose is to
+ * create instances of classes that inherit from the TdMon interface.
+ *
+ * The "Factory" pattern is used to create the TdMon, while supporting different
+ * data sources. On can implement a factory that creates TdMon instances from a
+ * Jira data source and another factory that create TdMon instances from an
+ * Azure data source for example. The concrete factory to use can be selected at
+ * compile time, as a template parameter in the Core class.
+ *
+ */
 class TdMonFactory {
  public:
   /**
@@ -43,7 +51,7 @@ class TdMonFactory {
   /**
    * @brief Create the td-mon
    * @return A unique_ptr containing the created td-mon
-  */
+   */
   virtual std::unique_ptr<TdMon> create() = 0;
 };
 }  // namespace tdmon

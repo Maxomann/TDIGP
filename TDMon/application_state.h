@@ -30,7 +30,10 @@
 
 namespace tdmon {
 /**
- * @brief Interface for all states of the application.
+ * @brief Interface for all states of the application (main menu, setup menu,
+ * etc...). Implementations of this interface each represent a state and are
+ * responsible for setting up their UI and UI callbacks. "State" refers to the
+ * use of the "State" pattern.
  */
 class ApplicationState {
  public:
