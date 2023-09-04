@@ -39,13 +39,22 @@
 namespace tdmon {
 /**
  * @brief The core of the application. Handles the window, gui and application
- * states.
- * @tparam TdMonFactoryType The td-mon factory to use. Must inherit from TdMonFactory.
- * @tparam TdMonCacheType The td-mon cache type to use. Must inherit from TdMonCache.
- * @tparam MainMenuType The main menu type to use. Must inherit from ApplicationState.
- * @tparam SetupMenuType The setup menu type to use. Must inherit from ApplicationState.
- * @tparam ObserveMenuType The observe menu type to use. Must inherit from ApplicationState.
-*/
+ * states. Creates one instance each of: TdMonCacheType and TdMonFactoryType to
+ * pass them to the appropriate application states where they are needed. Uses
+ * the MainMenuType, SetupMenuType and ObserveMenuType to switch to different
+ * application states respectively.
+ *
+ * @tparam TdMonFactoryType The td-mon factory to use. Must inherit from
+ * TdMonFactory.
+ * @tparam TdMonCacheType The td-mon cache type to use. Must inherit from
+ * TdMonCache.
+ * @tparam MainMenuType The main menu type to use. Must inherit from
+ * ApplicationState.
+ * @tparam SetupMenuType The setup menu type to use. Must inherit from
+ * ApplicationState.
+ * @tparam ObserveMenuType The observe menu type to use. Must inherit from
+ * ApplicationState.
+ */
 template <class TdMonFactoryType, class TdMonCacheType, class MainMenuType,
           class SetupMenuType, class ObserveMenuType>
   requires std::constructible_from<SetupMenuType, TdMonFactoryType&> &&

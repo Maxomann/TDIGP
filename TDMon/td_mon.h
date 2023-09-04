@@ -28,7 +28,10 @@
 
 namespace tdmon {
 /**
- * @brief The technical debt monster interface
+ * @brief The technical debt monster interface. The purpose of this interface is
+ * to represent a technical debt monster with its unique attack, defense and
+ * speed values. It also allows requesting the currently appropriate display
+ * texture for the TdMon, as well as, serialize it to json.
  */
 class TdMon {
  public:
@@ -48,31 +51,31 @@ class TdMon {
   /**
    * @brief Get the current level of the td-mon
    * @return The level
-  */
+   */
   virtual unsigned int getLevel() const = 0;
 
   /**
    * @brief Get the attack value of this td-mon
    * @return The attack value
-  */
+   */
   virtual unsigned int getAttackValue() const = 0;
-  
+
   /**
    * @brief Get the defense value of this td-mon
    * @return The defense value
-  */
+   */
   virtual unsigned int getDefenseValue() const = 0;
-  
+
   /**
    * @brief Get the speed value of this td-mon
    * @return The speed value
-  */
+   */
   virtual unsigned int getSpeedValue() const = 0;
 
   /**
    * @brief Serialize this td-mon to json
    * @return The td-mon in json format
-  */
+   */
   virtual nlohmann::json toJson() const = 0;
 
   /**
